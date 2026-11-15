@@ -386,7 +386,7 @@
     .upi-trigger:hover { background: rgba(238,162,155,.15); }
     .upi-hint { margin-top: 2px; }
 
-    /* ListenBrainz: a small listening journal, populated from its public API. */
+    /* ListenBrainz listening journal. */
     .listening-panel {
       margin-top: 18px;
       padding: clamp(20px,3vw,29px);
@@ -1167,7 +1167,7 @@
     .skip-link { position:fixed; z-index:200; top:10px; left:10px; padding:10px 14px; border-radius:9px; color:#fff; background:#302637; transform:translateY(-160%); }
     .skip-link:focus { transform:translateY(0); }
     .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
-    /* Dark is the default palette. Light remains available from the header toggle. */
+    /* Dark is the fixed site palette. */
     body[data-theme="dark"] { color-scheme:dark; --paper:#17151b; --paper-2:#211e27; --paper-3:#24212a; --ink:#f4eff6; --ink-2:#e4dce8; --muted:#b8adbf; --line:rgba(255,255,255,.16); --night:#100f14; --night-2:#201c26; --white:#fffaf4; background:var(--paper); color:var(--ink); }
     body[data-theme="dark"] .header { background:rgba(23,21,27,.94); }
     body[data-theme="dark"] .top-nav a { color:#d0c7d7; }
@@ -1358,6 +1358,297 @@
     @media (prefers-reduced-motion:reduce) { .upi-panel { animation:none; } }
   </style>
 
+
+  <style>
+    /* Latest visual tidy-up: distinguish support, simplify the profile mark, and tighten vertical rhythm. */
+    .support-rail {
+      padding-block: 12px;
+      background:
+        radial-gradient(ellipse at 7% 50%, rgba(242,161,143,.13), transparent 32%),
+        linear-gradient(112deg, #211b28 0%, #2c2232 52%, #241e2b 100%);
+      border-block: 1px solid rgba(242,161,143,.25);
+    }
+    .support-inner {
+      min-height: 0;
+      padding: 14px 18px;
+      border: 1px solid rgba(242,161,143,.25);
+      border-radius: 17px;
+      background: linear-gradient(115deg, rgba(65,45,64,.68), rgba(49,38,57,.82));
+      box-shadow: 0 8px 28px rgba(0,0,0,.14), inset 0 1px 0 rgba(255,255,255,.045);
+    }
+    .support-copy strong { color: #fff8f6; font-size: 15px; }
+    .support-copy small { color: #d2c1d2; }
+    .support-spark { box-shadow: 0 0 0 7px rgba(242,161,143,.16), 0 0 18px rgba(242,161,143,.24); }
+    .support-link.kofi {
+      color: #291d27;
+      background: #f4a18f;
+      border-color: #f4a18f;
+      box-shadow: 0 5px 20px rgba(244,161,143,.24);
+    }
+    .support-link.kofi:hover { background: #ffb3a3; border-color: #ffb3a3; }
+
+    .profile-card {
+      min-height: 0;
+      justify-content: flex-start;
+      gap: 25px;
+      padding: 24px 27px;
+      background: linear-gradient(145deg, #28232f 0%, #211e29 62%, #2b2230 100%);
+    }
+    .profile-top { font-size: 9px; color: #d4c8d9; }
+    .profile-name { max-width: calc(100% - 78px); }
+    .profile-name strong { font-size: clamp(31px,3vw,35px); letter-spacing: -.065em; }
+    .profile-name span { margin-top: 8px; color: #ded3e2; font-size: 14px; }
+    .age-pill { margin-top: 13px; }
+    .profile-monogram {
+      top: 57%; right: 28px; width: auto; height: auto;
+      display: block; overflow: visible; transform: translateY(-50%);
+      border: 0; border-radius: 0; box-shadow: none;
+      color: transparent;
+      background: linear-gradient(145deg, #d9c0e8 8%, #bd91c6 48%, #f0a08f 94%);
+      background-clip: text; -webkit-background-clip: text;
+      opacity: .88;
+      font: italic 600 78px/.9 var(--serif);
+      text-shadow: 0 8px 22px rgba(209,145,174,.10);
+    }
+    .profile-monogram::after { content: none; }
+
+    .footer-actions { margin-left: auto; flex: 0 0 auto; justify-content: flex-end; text-align: right; }
+    .footer-actions a { display: inline-flex; align-items: center; justify-content: flex-end; text-align: right; }
+    .listen-profile-link { flex: 0 0 auto; }
+    .listening-panel .listen-foot { display: none; }
+
+    @media (max-width: 680px) {
+      .support-rail { padding-block: 9px; }
+      .support-inner { padding: 13px 13px; border-radius: 15px; }
+      .support-main { gap: 10px; }
+      .support-actions { gap: 8px; }
+      .profile-card { gap: 22px; padding: 21px 20px; }
+      .profile-name { max-width: calc(100% - 70px); }
+      .profile-name strong { font-size: 32px; }
+      .profile-name span { font-size: 13px; }
+      .profile-monogram { right: 20px; font-size: 64px; }
+      .footer-inner { align-items: flex-start; }
+      .footer-actions { width: 100%; margin-left: 0; justify-content: flex-end; }
+    }
+    @media (max-width: 370px) {
+      .profile-card { padding-inline: 17px; }
+      .profile-name { max-width: calc(100% - 62px); }
+      .profile-name strong { font-size: 29px; }
+      .profile-monogram { right: 16px; font-size: 58px; }
+    }
+  </style>
+
+
+  <style>
+    /* PrasannaOne final visual pass: one support panel, atmospheric profile, and expressive contact links. */
+    :root { color-scheme: dark; }
+    body { color-scheme: dark; background: #17151b; }
+
+    /* One distinct support panel. The outer rail is only spacing, not a second box. */
+    .support-rail {
+      padding: 12px 0 0;
+      border: 0;
+      background: transparent;
+    }
+    .support-inner {
+      width: min(var(--max), calc(100% - var(--gutter) * 2));
+      min-height: 0;
+      margin: 0 auto;
+      padding: 15px 18px;
+      border: 1px solid rgba(238,162,155,.22);
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at 92% 5%, rgba(169,116,164,.24), transparent 43%),
+        linear-gradient(112deg, #241d29 0%, #302433 54%, #25202a 100%);
+      box-shadow: 0 12px 34px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .support-main { display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .support-copy { display:flex; align-items:center; gap:12px; min-width:0; }
+    .support-copy strong { color:#fff8f6; font-size:15px; }
+    .support-copy small { color:#cdbdce; }
+    .support-spark { background:#f2a18f; box-shadow:0 0 0 6px rgba(242,161,143,.13), 0 0 18px rgba(242,161,143,.22); }
+    .support-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:center; gap:9px; width:min(480px,53%); }
+    .support-link, .upi-trigger { width:100%; min-width:0; min-height:44px; }
+    .support-link.kofi {
+      display:inline-flex; align-items:center; justify-content:center; gap:9px;
+      color:#241b24; background:#f4a08e; border-color:#f4a08e;
+      box-shadow:0 5px 20px rgba(244,160,142,.2);
+    }
+    .support-link.kofi:hover { color:#211820; background:#ffb2a0; border-color:#ffb2a0; }
+    .kofi-mark { display:block; width:22px; height:22px; flex:0 0 22px; box-sizing:border-box; padding:4px; border-radius:50%; background:#fff; }
+    .support-link.kofi .arrow { margin-left:1px; }
+    .upi-trigger {
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:0 14px; border:1px solid rgba(238,162,155,.52); border-radius:99px;
+      color:#f5cbc4; background:rgba(238,162,155,.075); font-size:11px; font-weight:700;
+      white-space:nowrap; cursor:pointer; transition:background .2s,border-color .2s,transform .2s;
+    }
+    .upi-trigger:hover, .upi-trigger[aria-expanded="true"] { background:rgba(238,162,155,.15); border-color:rgba(238,162,155,.82); transform:translateY(-1px); }
+    .upi-chevron { transition:transform .2s; }
+    .upi-trigger[aria-expanded="true"] .upi-chevron { transform:rotate(180deg); }
+    .upi-panel {
+      margin-top:14px; padding:15px 0 2px; border:0; border-top:1px solid rgba(255,255,255,.12);
+      border-radius:0; background:transparent; box-shadow:none;
+    }
+    .upi-panel[hidden] { display:none !important; }
+    .upi-panel-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .upi-panel label { color:#d8cbdc; }
+    .upi-pop-actions { display:flex; align-items:center; justify-content:flex-end; gap:14px; margin-top:13px; }
+    .upi-pay { order:2; min-height:40px; padding-inline:17px; }
+    .upi-copy { order:1; }
+
+    /* Hero: preserve the custom project collage, give the opening more atmosphere and less friction. */
+    .hero {
+      padding-top:clamp(42px,6vw,76px);
+      background:
+        radial-gradient(ellipse at 86% 39%, rgba(238,162,155,.19), transparent 34%),
+        radial-gradient(ellipse at 9% 86%, rgba(151,125,177,.17), transparent 34%),
+        #17151b;
+    }
+    .hero::before { opacity:.09; background-image:radial-gradient(rgba(238,220,232,.25) .7px,transparent .7px); }
+    .hero-kicker { color:#d6cbd9; }
+    .hero-name { font-size:clamp(4.7rem,10vw,8.4rem); }
+    .hero-tagline { margin-top:17px; }
+    .hero-description { color:#c4b9cb; }
+    .hero-note { color:#b9aebe; }
+    .scene-wash { background:linear-gradient(135deg,rgba(236,164,154,.4),rgba(157,137,181,.34) 55%,rgba(255,255,255,.14)); }
+    .scene-ring { border-color:rgba(213,186,211,.2); }
+    .scene-ring::before, .scene-ring::after { border-color:rgba(213,186,211,.13); }
+
+    /* About profile: a large, faded abstract light form, not a letter or icon. */
+    .about { padding-top:clamp(58px,7vw,88px); }
+    .about-head { margin-bottom:24px; }
+    .profile-card {
+      position:relative; min-height:250px; justify-content:space-between; gap:24px;
+      padding:25px 27px; overflow:hidden; isolation:isolate;
+      border:1px solid rgba(220,197,222,.19); border-radius:22px;
+      background:linear-gradient(145deg,#292330 0%,#211e29 61%,#2b2230 100%);
+    }
+    .profile-card::before {
+      content:""; position:absolute; z-index:0; pointer-events:none;
+      width:64%; height:145%; right:-8%; top:-27%; border-radius:50%;
+      background:
+        radial-gradient(ellipse at 44% 43%,rgba(224,147,160,.23),transparent 31%),
+        radial-gradient(ellipse at 67% 54%,rgba(157,119,177,.34),transparent 48%),
+        radial-gradient(ellipse at 52% 64%,rgba(227,157,145,.13),transparent 64%);
+      filter:blur(9px); opacity:.9;
+    }
+    .profile-card::after {
+      content:""; position:absolute; z-index:0; pointer-events:none;
+      width:53%; height:90%; right:-6%; top:7%; border-radius:50%;
+      border:1px solid rgba(230,190,207,.13); transform:rotate(-24deg);
+      box-shadow:0 0 0 18px rgba(230,190,207,.025),0 0 0 38px rgba(230,190,207,.02),0 0 0 60px rgba(230,190,207,.016);
+    }
+    .profile-top, .profile-name { position:relative; z-index:1; }
+    .profile-top { color:#d5c9da; font-size:10px; }
+    .profile-name { max-width:78%; }
+    .profile-name strong { display:block; color:#f5eff7; font-size:clamp(34px,4vw,43px); line-height:1; letter-spacing:-.065em; }
+    .profile-name span { margin-top:9px; color:#d1c6d5; font-size:15px; }
+    .age-pill { display:inline-flex; align-items:baseline; gap:6px; margin-top:16px; padding:9px 14px; border:1px solid rgba(228,209,228,.24); border-radius:99px; color:#e0d7e5; background:rgba(255,255,255,.065); font-size:11px; }
+    .age-pill strong { color:#fff7fa; font-size:23px; }
+    .about-copy {
+      justify-content:flex-start; gap:17px; padding:clamp(22px,3vw,30px);
+      border-color:rgba(220,197,222,.16); background:#211e27;
+    }
+    .about-copy p { color:#d2c8d7; font-size:clamp(14px,1.35vw,16px); line-height:1.8; }
+    .about-copy p strong { color:#fff7fb; }
+    .about-tags { gap:8px; margin-top:3px; }
+    .about-tags span { padding:8px 12px; border-color:rgba(226,206,231,.2); color:#ddd2e2; background:rgba(255,255,255,.035); font-size:10px; }
+    .about-tags span strong { color:#f4a69b; }
+
+    /* ListenBrainz: keep its content readable in the dark palette. */
+    .listening-panel {
+      border-color:rgba(220,197,222,.18);
+      background:radial-gradient(ellipse at 92% 5%,rgba(147,109,157,.18),transparent 44%),linear-gradient(135deg,#28232f,#211e29 70%,#29212d);
+    }
+    .listen-recent { border-color:rgba(255,255,255,.14); background:rgba(255,255,255,.055); }
+    .listen-recent-head strong { color:#e8dfe9; }
+    .listen-recent-head .top-artist { color:#bdb1c4; }
+    .listen-item { border-color:rgba(255,255,255,.1); }
+
+    /* Contact: separate, recognisable mini destinations rather than a line of generic links. */
+    body[data-theme="dark"] .contact-row { background:transparent; }
+    .contact-row {
+      display:grid; grid-template-columns:1fr; align-items:start; gap:17px;
+      margin-top:24px; padding:27px 0 8px; border:0; border-top:1px solid rgba(220,197,222,.18);
+      border-radius:0; background:transparent;
+    }
+    .contact-heading strong { display:block; color:#f4edf6; font:600 clamp(24px,3vw,31px)/1.1 var(--display); letter-spacing:-.055em; }
+    .socials { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .socials a.social-link {
+      display:flex; align-items:center; justify-content:flex-start; gap:10px; min-width:0; min-height:66px;
+      padding:12px 13px; border:1px solid var(--contact-line,rgba(255,255,255,.13)); border-radius:14px;
+      color:var(--contact-ink,#e9e0eb); background:var(--contact-bg,rgba(255,255,255,.045));
+      font-size:12px; font-weight:700; text-decoration:none; transition:transform .2s,border-color .2s,background .2s;
+    }
+    .socials a.social-link:hover { transform:translateY(-3px); border-color:var(--contact-accent); background:var(--contact-hover,var(--contact-bg)); color:#fff; }
+    .social-link svg { display:block; flex:0 0 21px; width:21px; height:21px; overflow:visible; }
+    .social-link.github { --contact-accent:#e7e1ec; --contact-line:rgba(231,225,236,.2); --contact-bg:rgba(231,225,236,.055); --contact-hover:rgba(231,225,236,.11); }
+    .social-link.instagram { --contact-accent:#e89aa9; --contact-line:rgba(225,129,158,.25); --contact-bg:linear-gradient(120deg,rgba(236,126,132,.11),rgba(151,94,164,.12)); --contact-hover:linear-gradient(120deg,rgba(236,126,132,.22),rgba(151,94,164,.23)); }
+    .social-link.telegram { --contact-accent:#72b8f2; --contact-line:rgba(114,184,242,.24); --contact-bg:rgba(72,151,214,.09); --contact-hover:rgba(72,151,214,.17); }
+    .social-link.matrix { --contact-accent:#bba6e8; --contact-line:rgba(187,166,232,.24); --contact-bg:rgba(139,111,190,.1); --contact-hover:rgba(139,111,190,.18); }
+    .social-link.email { --contact-accent:#f0a092; --contact-line:rgba(240,160,146,.25); --contact-bg:rgba(240,160,146,.08); --contact-hover:rgba(240,160,146,.17); }
+    .social-link.github svg { fill:#e7e1ec; }
+    .social-link.instagram svg { fill:none; stroke:#e89aa9; stroke-width:1.8; }
+    .social-link.instagram svg .solid { fill:#e89aa9; stroke:none; }
+    .social-link.telegram svg { fill:#72b8f2; }
+    .social-link.matrix svg { fill:#bba6e8; }
+    .social-link.email svg { fill:none; stroke:#f0a092; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    .footer-inner { align-items:center; }
+    .footer-actions { margin-left:auto; flex:0 0 auto; justify-content:flex-end; text-align:right; }
+    .footer-actions a { display:inline-flex; justify-content:flex-end; text-align:right; }
+
+    @media (max-width:900px) {
+      .socials { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .social-link.email { grid-column:span 1; }
+    }
+    @media (max-width:680px) {
+      .support-rail { padding-top:9px; }
+      .support-inner { padding:13px 13px; border-radius:16px; }
+      .support-main { align-items:stretch; flex-direction:column; gap:12px; }
+      .support-copy strong { font-size:14px; }
+      .support-copy small { font-size:9px; }
+      .support-actions { width:100%; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+      .support-link, .upi-trigger { min-height:43px; padding-inline:8px; font-size:10px; }
+      .kofi-mark { width:20px; height:20px; flex-basis:20px; }
+      .upi-panel { margin-top:12px; padding-top:13px; }
+      .upi-panel-grid { grid-template-columns:1fr; gap:12px; }
+      .upi-pop-actions { justify-content:flex-end; gap:12px; }
+      .upi-pay { order:2; }
+      .upi-copy { order:1; }
+      .hero { padding-top:39px; padding-bottom:38px; }
+      .hero-kicker { margin-bottom:17px; }
+      .hero-name { font-size:clamp(4.15rem,14.4vw,5.5rem); }
+      .hero-tagline { margin-top:13px; }
+      .hero-scene { margin-top:2px; }
+      .about { padding-top:54px; }
+      .about-head { margin-bottom:20px; }
+      .profile-card { min-height:220px; padding:21px 20px; gap:18px; }
+      .profile-name { max-width:82%; }
+      .profile-name strong { font-size:34px; }
+      .profile-name span { font-size:14px; }
+      .age-pill { margin-top:13px; }
+      .contact-row { gap:14px; margin-top:20px; padding-top:22px; }
+      .socials { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+      .socials a.social-link { min-height:62px; padding:11px 12px; font-size:11px; }
+      .social-link.email { grid-column:span 2; }
+      .footer-inner { align-items:flex-start; }
+      .footer-actions { width:100%; margin-left:0; justify-content:flex-end; }
+    }
+    @media (max-width:370px) {
+      .support-link, .upi-trigger { gap:6px; font-size:9px; }
+      .kofi-mark { width:18px; height:18px; flex-basis:18px; }
+      .profile-card { padding-inline:17px; }
+      .profile-name strong { font-size:31px; }
+      .socials a.social-link { gap:8px; padding-inline:9px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .socials a.social-link, .upi-trigger { transition:none; }
+      .socials a.social-link:hover, .upi-trigger:hover { transform:none; }
+    }
+  </style>
+
 </head>
 <body data-theme="dark">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -1381,7 +1672,7 @@
           <div><strong>Support independent work</strong><small>Help keep these projects growing</small></div>
         </div>
         <div class="support-actions">
-          <a class="support-link kofi" href="https://ko-fi.com/PrasannaOne" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee <span class="arrow">↗</span></a>
+          <a class="support-link kofi" href="https://ko-fi.com/PrasannaOne" target="_blank" rel="noopener noreferrer"><svg class="kofi-mark" viewBox="0 0 24 24" role="img" aria-label="Ko-fi" focusable="false"><path fill="#FF5E5B" d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg> <span>Buy me a coffee</span> <span class="arrow" aria-hidden="true">↗</span></a>
           <button class="upi-trigger" id="upiToggle" type="button" aria-expanded="false" aria-controls="upiPanel">🇮🇳 Pay via UPI <span class="upi-chevron" aria-hidden="true">⌄</span></button>
         </div>
       </div>
@@ -1574,8 +1865,8 @@
       <div class="wrap">
         <div class="about-head"><div><div class="eyebrow">A little about the person behind the pixels</div><h2>Curious by nature.<br><em>Builder by habit.</em></h2></div></div>
         <div class="about-grid">
-          <div class="profile-card"><div class="profile-top"><span>Based in Tamil Nadu</span><span>India · IN</span></div><span class="profile-monogram" aria-hidden="true">P</span><div class="profile-name"><strong>Prasanna</strong><span>Investor · Psychologist</span><div class="age-pill"><strong id="liveAge">—</strong><span>years old</span></div></div></div>
-          <div class="about-copy"><p>I have an <strong>M.Sc. in Psychology</strong>, am currently pursuing an <strong>MBA</strong>, and have been investing in the stock market since 2022.</p><p>Building is where those interests meet technology. I like making useful things, playful experiences and small corners of the internet that feel considered.</p><div class="about-tags"><span>M.Sc. Psychology</span><span>MBA student</span><span><strong id="investingYears">4+</strong> years investing</span></div></div>
+          <div class="profile-card"><div class="profile-top"><span>Based in Tamil Nadu</span><span>India · IN</span></div><div class="profile-name"><strong>Prasanna</strong><span>Investor · Psychologist</span><div class="age-pill"><strong id="liveAge">—</strong><span>years old</span></div></div></div>
+          <div class="about-copy"><p>I have an <strong>M.Sc. in Psychology</strong> and am currently pursuing an <strong>MBA</strong>. I have been investing in the stock market since 2022.</p><p>Building is where those interests meet technology. I like making useful things, playful experiences and small corners of the internet that feel considered.</p><div class="about-tags"><span>M.Sc. Psychology</span><span>Pursuing an MBA</span><span><strong id="investingYears">4+</strong> years investing</span></div></div>
         </div>
         <section class="listening-panel" id="listening" aria-labelledby="listeningTitle">
           <div class="listening-head">
@@ -1591,7 +1882,7 @@
               <div class="listen-track">
                 <div class="listen-state" id="nowPlayingState">Last played</div>
                 <strong id="nowPlayingTitle" class="loading-shimmer">Checking what’s playing…</strong>
-                <span id="nowPlayingArtist">ListenBrainz · PrasannaOne</span>
+                <span id="nowPlayingArtist">Your latest listening activity</span>
               </div>
             </article>
             <div class="listen-recent">
@@ -1599,15 +1890,14 @@
               <div class="listen-list is-loading" id="recentList"><div class="listen-skeleton"><i></i><i></i><i></i></div></div>
             </div>
           </div>
-          <div class="listen-foot"><span id="listenUpdated">ListenBrainz · Public listening data</span><a href="https://listenbrainz.org/user/PrasannaOne/" target="_blank" rel="noopener noreferrer">View profile ↗</a></div>
         </section>
 
         <div class="contact-row" id="contact">
           <div class="contact-heading">
-            <strong>Find me elsewhere</strong>
+            <strong>Find me here.</strong>
           </div>
           <div class="socials" aria-label="Contact and social links">
-            <a class="social-link" href="https://github.com/PrasannaOne" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a class="social-link github" href="https://github.com/PrasannaOne" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.5-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1.77 2.02 3.36 1.44.1-.73.39-1.23.7-1.52-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.13-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.33-2.63 5.28-5.14 5.56.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg>
               <span>GitHub</span>
             </a>
@@ -1790,7 +2080,7 @@
         }
       });
 
-      // ListenBrainz public API: no private token is needed for public listening data.
+      // Load public listening activity from ListenBrainz.
       const lbRoot = 'https://api.listenbrainz.org/1';
       const lbUser = 'PrasannaOne';
       const lb = (path) => `${lbRoot}/${path}`;
@@ -1937,17 +2227,15 @@
             $('#recentList').replaceChildren();
             const unavailable = document.createElement('div');
             unavailable.className = 'listen-empty';
-            unavailable.textContent = 'The public API could not be reached right now.';
+            unavailable.textContent = 'Couldn’t load listening activity right now.';
             $('#recentList').appendChild(unavailable);
-            $('#listenUpdated').textContent = 'Live data unavailable';
           } else {
-            $('#listenUpdated').textContent = 'Public API · refreshes every 2 min';
           }
         } finally {
           listeningUpdateInFlight = false;
         }
       };
-      // Defer public API traffic until the listening panel is close to view.
+      // Defer listening requests until the panel is close to view.
       const listeningPanel = $('#listening');
       let listeningStarted = false;
       const startListeningUpdates = () => {
