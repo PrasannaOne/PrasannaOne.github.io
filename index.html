@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#eee9e3">
+  <meta name="theme-color" content="#17151b">
   <meta name="description" content="Prasanna One is a personal corner of the internet for independent projects, useful tools, games and experiments.">
   <meta property="og:title" content="PrasannaOne">
   <meta property="og:description" content="PrasannaOne.">
@@ -84,16 +84,11 @@
     .support-copy strong { display: block; font: 600 14px/1.15 var(--display); letter-spacing: -.02em; }
     .support-copy small { display: block; margin-top: 4px; color: rgba(255,250,244,.58); font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
     .support-actions { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; }
-    .support-link, .upi-summary { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 17px; border: 1px solid rgba(255,255,255,.23); border-radius: 99px; color: var(--white); background: rgba(255,255,255,.035); font-size: 11px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: transform .2s var(--ease), background .2s, border-color .2s; }
-    .support-link:hover, .upi-summary:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.1); }
+    .support-link, .upi-trigger { min-height: 40px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 17px; border: 1px solid rgba(255,255,255,.23); border-radius: 99px; color: var(--white); background: rgba(255,255,255,.035); font-size: 11px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: transform .2s var(--ease), background .2s, border-color .2s; }
+    .support-link:hover, .upi-trigger:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.1); }
     .support-link.kofi { color: #25202a; background: var(--coral); border-color: var(--coral); }
     .support-link.kofi:hover { background: #f4b7ae; border-color: #f4b7ae; }
-    .upi-details { position: relative; }
-    .upi-details summary { list-style: none; }
-    .upi-details summary::-webkit-details-marker { display: none; }
-    .upi-details[open] .upi-summary { background: rgba(238,162,155,.14); border-color: var(--coral); }
-    .upi-popover { position: absolute; top: calc(100% + 11px); right: 0; z-index: 95; width: min(330px, calc(100vw - 34px)); padding: 18px; border: 1px solid rgba(238,162,155,.35); border-radius: 18px; color: var(--white); background: #2b2731; box-shadow: 0 18px 55px rgba(0,0,0,.25); animation: pop-in .2s var(--ease) both; }
-    .upi-popover label { display: block; margin: 0 0 9px; color: #c9c2cb; font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .upi-panel label { display: block; margin: 0 0 9px; color: #c9c2cb; font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
     .amount-options { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
     .amount-choice { min-width: 55px; min-height: 35px; padding: 0 12px; border: 1px solid rgba(255,255,255,.2); border-radius: 99px; color: #fffaf4; background: transparent; font-size: 11px; font-weight: 700; cursor: pointer; }
     .amount-choice[aria-pressed="true"] { color: #241f29; background: var(--coral); border-color: var(--coral); }
@@ -311,8 +306,7 @@
       .support-copy strong { font-size: 13px; }
       .support-copy small { margin-top: 2px; font-size: 8px; }
       .support-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-      .support-link, .upi-summary { width: 100%; min-height: 39px; padding-inline: 8px; font-size: 10px; }
-      .upi-popover { right: 0; width: min(330px, calc(100vw - 34px)); }
+      .support-link, .upi-trigger { width: 100%; min-height: 39px; padding-inline: 8px; font-size: 10px; }
       .hero { padding: 43px 0 42px; }
       .hero-kicker { margin-bottom: 19px; }
       .hero-name { gap: 8px; font-size: clamp(4rem,15vw,6.1rem); }
@@ -386,10 +380,10 @@
     }
     .support-inner { min-height: 76px; }
     .support-copy strong { font-size: 14px; }
-    .support-link, .upi-summary { min-height: 43px; padding-inline: 19px; font-size: 11px; }
+    .support-link, .upi-trigger { min-height: 43px; padding-inline: 19px; font-size: 11px; }
     .support-link.kofi { box-shadow: 0 4px 15px rgba(238,162,155,.13); }
-    .upi-summary { border-color: rgba(238,162,155,.48); background: rgba(238,162,155,.075); }
-    .upi-summary:hover { background: rgba(238,162,155,.15); }
+    .upi-trigger { border-color: rgba(238,162,155,.48); background: rgba(238,162,155,.075); }
+    .upi-trigger:hover { background: rgba(238,162,155,.15); }
     .upi-hint { margin-top: 2px; }
 
     /* ListenBrainz: a small listening journal, populated from its public API. */
@@ -455,6 +449,49 @@
     }
     .listen-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .listen-art .listen-fallback { font: 600 25px var(--serif); font-style: italic; }
+    .listen-art.no-art {
+      isolation: isolate;
+      color: #f6eaff;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(255,255,255,.18), transparent 25%),
+        linear-gradient(145deg, #7658a6 0%, #40365f 52%, #24243b 100%);
+    }
+    .listen-art.no-art::before {
+      content: "";
+      position: absolute;
+      width: 72%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.28);
+      background: repeating-radial-gradient(circle, rgba(255,255,255,.13) 0 1px, transparent 2px 6px);
+      box-shadow: 0 5px 18px rgba(0,0,0,.22);
+      transform: rotate(-18deg);
+      z-index: -1;
+    }
+    .listen-art.no-art::after {
+      content: "";
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #f2c8e8;
+      box-shadow: 0 0 0 5px rgba(242,200,232,.12), 0 0 18px rgba(242,200,232,.8);
+    }
+    .listen-art.no-art .listen-fallback {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border: 1px solid rgba(255,255,255,.32);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(24,20,42,.76);
+      font: 600 17px/1 var(--serif);
+      font-style: normal;
+      box-shadow: 0 2px 10px rgba(0,0,0,.2);
+    }
     .listen-track { position: relative; z-index: 1; min-width: 0; }
     .listen-state {
       display: inline-flex;
@@ -519,7 +556,7 @@
       .support-copy strong { font-size: 13px; }
       .support-copy small { font-size: 8px; }
       .support-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-      .support-link, .upi-summary { min-height: 42px; font-size: 10px; }
+      .support-link, .upi-trigger { min-height: 42px; font-size: 10px; }
       .listening-panel { margin-top: 15px; padding: 17px; }
       .listening-head { margin-bottom: 13px; }
       .listening-grid { grid-template-columns: 1fr; gap: 9px; }
@@ -528,7 +565,7 @@
       .listen-foot { font-size: 7px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .support-link, .upi-summary { transition: none; }
+      .support-link, .upi-trigger { transition: none; }
     }
 
 
@@ -1125,6 +1162,53 @@
       .rework-card { transition:none; }
       .rework-card:hover { transform:none; }
     }
+
+    /* Small accessibility, search and theme enhancements. */
+    .skip-link { position:fixed; z-index:200; top:10px; left:10px; padding:10px 14px; border-radius:9px; color:#fff; background:#302637; transform:translateY(-160%); }
+    .skip-link:focus { transform:translateY(0); }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+    /* Dark is the default palette. Light remains available from the header toggle. */
+    body[data-theme="dark"] { color-scheme:dark; --paper:#17151b; --paper-2:#211e27; --paper-3:#24212a; --ink:#f4eff6; --ink-2:#e4dce8; --muted:#b8adbf; --line:rgba(255,255,255,.16); --night:#100f14; --night-2:#201c26; --white:#fffaf4; background:var(--paper); color:var(--ink); }
+    body[data-theme="dark"] .header { background:rgba(23,21,27,.94); }
+    body[data-theme="dark"] .top-nav a { color:#d0c7d7; }
+    body[data-theme="dark"] .mark { color:var(--ink); border-color:var(--line); }
+    body[data-theme="dark"] .contact-link, body[data-theme="dark"] .contact-row { background:rgba(255,255,255,.035); }
+    body[data-theme="dark"] .profile-card, body[data-theme="dark"] .about-copy { background:var(--paper-2); color:var(--ink); }
+    body[data-theme="dark"] .profile-card::after { color:rgba(255,255,255,.13); }
+    body[data-theme="dark"] .profile-top { color:#c9bfce; }
+    body[data-theme="dark"] .profile-name span { color:#c8bfce; }
+    body[data-theme="dark"] .age-pill { color:#d8cfdd; background:rgba(255,255,255,.075); border-color:rgba(255,255,255,.2); }
+    body[data-theme="dark"] .age-pill strong { color:#fffaf4; }
+    body[data-theme="dark"] .age-pill span { color:#cfc5d5; }
+    body[data-theme="dark"] .rework-card { background:#211e27; border-color:var(--line); color:var(--ink); }
+    body[data-theme="dark"] .rework-card p, body[data-theme="dark"] .contact-link small { color:#c8bfce; }
+    body[data-theme="dark"] .rework-type { color:#c0b5c7; }
+    body[data-theme="dark"] .back-top { color:#201b25; background:#d7c4e7; }
+    body[data-theme="dark"] .button { color:#241f29; background:#eee7f1; border-color:#eee7f1; }
+    body[data-theme="dark"] .button:hover { color:#241f29; background:#fffaf4; border-color:#fffaf4; }
+    body[data-theme="dark"] .button.secondary { color:#f4eff6; background:rgba(255,255,255,.075); border-color:rgba(255,255,255,.23); }
+    body[data-theme="dark"] .button.secondary:hover { color:#fffaf4; background:rgba(255,255,255,.13); border-color:rgba(238,162,155,.7); }
+    body[data-theme="dark"] .about-copy p { color:#d2cad8; }
+    body[data-theme="dark"] .about-tags span { color:#e1d9e6; border-color:rgba(255,255,255,.2); }
+    body[data-theme="dark"] .about-tags strong { color:#f1b8ae; font-weight:700; }
+    body[data-theme="dark"] .social-link { color:#d0c7d7; }
+    body[data-theme="dark"] .social-link:hover { color:#f0b0a8; }
+    body[data-theme="dark"] .footer-inner { color:#b8adbf; }
+    body[data-theme="dark"] .footer a { color:#e2d9e8; }
+    body[data-theme="dark"] .hero-note { color:#c7bdcf; }
+    body[data-theme="dark"] .listen-profile-link { color:#f0b7ad; border-color:rgba(240,183,173,.6); }
+    body[data-theme="dark"] .listen-recent { background:#211e27; border-color:rgba(255,255,255,.16); }
+    body[data-theme="dark"] .listen-recent-head strong { color:#e5ddeb; }
+    body[data-theme="dark"] .listen-recent-head .top-artist { color:#bdb1c5; }
+    body[data-theme="dark"] .listen-row { border-top-color:rgba(255,255,255,.12); }
+    body[data-theme="dark"] .listen-row-copy strong { color:#fffaf4; }
+    body[data-theme="dark"] .listen-row-copy span { color:#c3b9ca; }
+    body[data-theme="dark"] .listen-time { color:#b8adbf; }
+    body[data-theme="dark"] .listen-empty { color:#c3b9ca; }
+    body[data-theme="dark"] .listen-foot { color:#b8adbf; }
+    body[data-theme="dark"] .listen-foot a { color:#f0b7ad; }
+    body[data-theme="dark"] .insight-label { color:#d0c4d6; }
+
   </style>
 
 
@@ -1180,8 +1264,103 @@
     @media(prefers-reduced-motion:reduce) { .link-pressed { transform:none!important; } }
   </style>
 
+
+  <style>
+    /* Final polish: dark-only palette, a contained monogram and an inline UPI expander. */
+    :root { color-scheme: dark; }
+    body { color-scheme: dark; }
+    .support-inner { display: block; min-height: 0; padding-block: 13px; }
+    .support-main { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .support-actions { display: flex; align-items: center; justify-content: flex-end; gap: 9px; }
+    .support-link.kofi {
+      color: #261d26;
+      background: #f2a18f;
+      border-color: #f2a18f;
+      box-shadow: 0 5px 18px rgba(242,161,143,.2);
+    }
+    .support-link.kofi:hover { color: #211820; background: #f7b09e; border-color: #f7b09e; }
+    .upi-trigger {
+      min-height: 43px; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 0 19px; border: 1px solid rgba(238,162,155,.55); border-radius: 99px;
+      color: #f7d1ca; background: rgba(238,162,155,.08); font-size: 11px; font-weight: 700;
+      white-space: nowrap; cursor: pointer; transition: transform .2s var(--ease), background .2s, border-color .2s;
+    }
+    .upi-trigger:hover, .upi-trigger[aria-expanded="true"] { transform: translateY(-1px); background: rgba(238,162,155,.16); border-color: #f2a18f; }
+    .upi-chevron { display: inline-block; font-size: 16px; line-height: 1; transition: transform .2s var(--ease); }
+    .upi-trigger[aria-expanded="true"] .upi-chevron { transform: rotate(180deg); }
+    .upi-panel {
+      width: 100%; margin-top: 12px; padding: 17px 19px 15px; border: 1px solid rgba(238,162,155,.27);
+      border-radius: 17px; color: #f7f0f8;
+      background: linear-gradient(112deg, rgba(32,28,37,.96), rgba(43,35,47,.96));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+      animation: pop-in .2s var(--ease) both;
+    }
+    .upi-panel[hidden] { display: none !important; }
+    .upi-panel-grid { display: grid; grid-template-columns: 1fr minmax(180px,.72fr); align-items: end; gap: 18px; }
+    .upi-panel label { display: block; margin: 0 0 9px; color: #d5c9d8; font: 9px var(--mono); letter-spacing: .13em; text-transform: uppercase; }
+    .amount-options { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; }
+    .amount-choice { min-width: 57px; min-height: 36px; border-color: rgba(255,255,255,.2); color: #f8f2f8; background: rgba(255,255,255,.025); }
+    .amount-choice[aria-pressed="true"] { color: #241d27; background: #f2a18f; border-color: #f2a18f; }
+    .amount-entry { margin: 0; }
+    .amount-entry span { color: #f2a18f; }
+    .amount-entry input { height: 39px; border-color: rgba(255,255,255,.2); color: #fffaf4; background: #19161e; }
+    .upi-hint, .upi-feedback { margin: 9px 0 0; color: #c5b9c9; font-size: 10px; }
+    .upi-pop-actions { display: flex; align-items: center; justify-content: flex-end; gap: 16px; margin-top: 12px; }
+    .upi-pay { min-height: 39px; padding: 0 17px; color: #241d27; background: #f2a18f; }
+    .upi-pay:hover { background: #f7b09e; }
+    .upi-copy { color: #f3c3bc; }
+    .upi-feedback { min-height: 14px; color: #f3c3bc; text-align: right; }
+
+    .profile-card { background: linear-gradient(145deg,#28232d 0%,#211e27 58%,#30242f 100%); }
+    .profile-card::after { content: none; }
+    .profile-monogram {
+      position: absolute; z-index: 0; top: 50%; right: 23px; width: 67px; height: 76px;
+      display: grid; place-items: center; transform: translateY(-30%); overflow: hidden;
+      border: 1px solid rgba(245,190,183,.32); border-radius: 18px;
+      color: rgba(255,244,243,.9);
+      background:
+        radial-gradient(circle at 75% 17%, rgba(255,210,190,.5), transparent 30%),
+        radial-gradient(circle at 15% 90%, rgba(175,145,196,.55), transparent 46%),
+        linear-gradient(145deg,#76576f,#49364f 58%,#342b3e);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 8px 24px rgba(0,0,0,.16);
+      font: italic 600 48px/.9 var(--serif); pointer-events: none;
+    }
+    .profile-monogram::after {
+      content: ""; position: absolute; inset: 7px; border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px; pointer-events: none;
+    }
+    .profile-name { max-width: calc(100% - 78px); }
+    .profile-name span { color: #d2c5d6; }
+
+    @media (max-width:680px) {
+      .support-inner { padding-block: 12px; }
+      .support-main { align-items: flex-start; flex-direction: column; gap: 11px; }
+      .support-copy { width: auto; }
+      .support-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .support-link, .upi-trigger { width: 100%; min-height: 42px; padding-inline: 8px; font-size: 10px; }
+      .upi-panel { margin-top: 11px; padding: 15px; }
+      .upi-panel-grid { grid-template-columns: 1fr; gap: 13px; }
+      .upi-pop-actions { justify-content: flex-end; gap: 12px; }
+      .upi-pay { min-height: 40px; padding-inline: 15px; }
+      .profile-card { min-height: 185px; }
+      .profile-monogram { right: 18px; width: 61px; height: 70px; transform: translateY(-23%); font-size: 43px; }
+      .profile-name { max-width: calc(100% - 68px); }
+      .profile-name span { font-size: 11px; }
+    }
+    @media (max-width:370px) {
+      .upi-pop-actions { gap: 9px; }
+      .upi-copy { font-size: 9px; }
+      .upi-pay { padding-inline: 12px; font-size: 10px; }
+      .profile-monogram { right: 14px; width: 56px; height: 64px; }
+      .profile-name { max-width: calc(100% - 61px); }
+      .profile-name span { font-size: 10px; }
+    }
+    @media (prefers-reduced-motion:reduce) { .upi-panel { animation:none; } }
+  </style>
+
 </head>
-<body>
+<body data-theme="dark">
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="header" id="top">
     <div class="header-inner">
       <a class="mark" href="#home" aria-label="Back to the beginning">P.</a>
@@ -1196,15 +1375,19 @@
 
   <aside class="support-rail" id="support" aria-label="Support this work">
     <div class="support-inner">
-      <div class="support-copy">
-        <span class="support-spark" aria-hidden="true"></span>
-        <div><strong>Support independent work</strong><small>Help keep these projects growing</small></div>
+      <div class="support-main">
+        <div class="support-copy">
+          <span class="support-spark" aria-hidden="true"></span>
+          <div><strong>Support independent work</strong><small>Help keep these projects growing</small></div>
+        </div>
+        <div class="support-actions">
+          <a class="support-link kofi" href="https://ko-fi.com/PrasannaOne" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee <span class="arrow">↗</span></a>
+          <button class="upi-trigger" id="upiToggle" type="button" aria-expanded="false" aria-controls="upiPanel">🇮🇳 Pay via UPI <span class="upi-chevron" aria-hidden="true">⌄</span></button>
+        </div>
       </div>
-      <div class="support-actions">
-        <a class="support-link kofi" href="https://ko-fi.com/PrasannaOne" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee <span class="arrow">↗</span></a>
-        <details class="upi-details" id="upiDetails">
-          <summary class="upi-summary">🇮🇳 UPI · India <span class="arrow">↗</span></summary>
-          <div class="upi-popover">
+      <div class="upi-panel" id="upiPanel" hidden>
+        <div class="upi-panel-grid">
+          <div>
             <label>Choose an amount</label>
             <div class="amount-options" role="group" aria-label="UPI tip amount">
               <button class="amount-choice" type="button" data-amount="20" aria-pressed="true">₹20</button>
@@ -1212,22 +1395,24 @@
               <button class="amount-choice" type="button" data-amount="100" aria-pressed="false">₹100</button>
               <button class="amount-choice" type="button" data-amount="200" aria-pressed="false">₹200</button>
             </div>
+          </div>
+          <div>
             <label for="upiAmount">Or enter another amount</label>
             <div class="amount-entry"><span>₹</span><input id="upiAmount" type="number" inputmode="numeric" min="20" step="1" value="20" aria-describedby="upiHint upiFeedback"></div>
-            <p class="upi-hint" id="upiHint">Choose a suggested amount or enter your own.</p>
-            <div class="upi-pop-actions"><button class="upi-pay" id="payUpi" type="button">Continue to UPI ↗</button><button class="upi-copy" id="copyUpi" type="button">Copy UPI ID</button></div>
-            <p class="upi-feedback" id="upiFeedback" role="status" aria-live="polite"></p>
           </div>
-        </details>
+        </div>
+        <p class="upi-hint" id="upiHint">Choose a suggested amount or enter your own.</p>
+        <div class="upi-pop-actions"><button class="upi-copy" id="copyUpi" type="button">Copy UPI ID</button><button class="upi-pay" id="payUpi" type="button">Continue to UPI ↗</button></div>
+        <p class="upi-feedback" id="upiFeedback" role="status" aria-live="polite"></p>
       </div>
     </div>
   </aside>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="hero" id="home">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <div class="hero-kicker eyebrow">Independent creator · Tamil Nadu, India</div>
+          <div class="hero-kicker eyebrow">Based in Tamil Nadu, India</div>
           <h1 class="hero-name">Prasanna <small>ONE</small></h1>
           <p class="hero-tagline">Ideas become <em>things.</em></p>
           <p class="hero-description">I build independent tools, tiny worlds and playful digital experiences, guided by curiosity about people, markets and technology.</p>
@@ -1273,7 +1458,7 @@
               <h3>Neruko</h3>
               <p>An anonymous space for group conversations and private messages.</p>
               <div class="project-links">
-                <a href="https://nerukko.prasannaone.workers.dev/" target="_blank" rel="noopener noreferrer">Open Neruko <span>↗</span></a>
+                <a href="https://neruko.prasannaone.workers.dev/" target="_blank" rel="noopener noreferrer">Open Neruko <span>↗</span></a>
                 <a href="https://github.com/PrasannaOne/Neruko" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
               </div>
             </article>
@@ -1389,8 +1574,8 @@
       <div class="wrap">
         <div class="about-head"><div><div class="eyebrow">A little about the person behind the pixels</div><h2>Curious by nature.<br><em>Builder by habit.</em></h2></div></div>
         <div class="about-grid">
-          <div class="profile-card"><div class="profile-top"><span>Based in Tamil Nadu</span><span>India · IN</span></div><div class="profile-name"><strong>Prasanna</strong><span>Independent creator · Psychologist</span><div class="age-pill"><strong id="liveAge">—</strong><span>years old</span></div></div></div>
-          <div class="about-copy"><p>I studied <strong>Psychology</strong>, am currently pursuing an <strong>MBA</strong>, and invest with a long-term interest in how people, businesses and markets behave.</p><p>Building is where those interests meet technology. I like making useful things, playful experiences and small corners of the internet that feel considered.</p><div class="about-tags"><span>M.Sc. Psychology</span><span>MBA student</span><span>Stock market investor</span><span>Independent creator</span></div></div>
+          <div class="profile-card"><div class="profile-top"><span>Based in Tamil Nadu</span><span>India · IN</span></div><span class="profile-monogram" aria-hidden="true">P</span><div class="profile-name"><strong>Prasanna</strong><span>Investor · Psychologist</span><div class="age-pill"><strong id="liveAge">—</strong><span>years old</span></div></div></div>
+          <div class="about-copy"><p>I have an <strong>M.Sc. in Psychology</strong>, am currently pursuing an <strong>MBA</strong>, and have been investing in the stock market since 2022.</p><p>Building is where those interests meet technology. I like making useful things, playful experiences and small corners of the internet that feel considered.</p><div class="about-tags"><span>M.Sc. Psychology</span><span>MBA student</span><span><strong id="investingYears">4+</strong> years investing</span></div></div>
         </div>
         <section class="listening-panel" id="listening" aria-labelledby="listeningTitle">
           <div class="listening-head">
@@ -1448,7 +1633,7 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="wrap footer-inner"><span>© <span id="year"></span> · Made independently in Tamil Nadu</span><div class="footer-actions"><a href="#top">Back to the beginning ↑</a></div></div></footer>
+  <footer class="footer"><div class="wrap footer-inner"><span>© <span id="year"></span> · Made independently in Tamil Nadu</span><div class="footer-actions"><a href="#home">Back to the beginning ↑</a></div></div></footer>
 
 
   <script>
@@ -1456,6 +1641,9 @@
       'use strict';
       const $ = (selector, root = document) => root.querySelector(selector);
       const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+      // Dark mode is the site's fixed colour theme.
+      document.body.dataset.theme = 'dark';
 
       // Age is calculated locally from the birthday. The date itself is never displayed or sent.
       const calculateAge = (year, monthIndex, day, today = new Date()) => {
@@ -1471,6 +1659,18 @@
       };
       updateLiveAge();
       document.addEventListener('visibilitychange', () => { if (!document.hidden) updateLiveAge(); });
+
+      // Investing experience is calculated from April 2022 and updates automatically each year.
+      const updateInvestingYears = () => {
+        const yearsNode = $('#investingYears');
+        if (!yearsNode) return;
+        const today = new Date();
+        let years = today.getFullYear() - 2022;
+        if (today.getMonth() < 3) years--;
+        yearsNode.textContent = `${Math.max(0, years)}+`;
+      };
+      updateInvestingYears();
+      document.addEventListener('visibilitychange', () => { if (!document.hidden) updateInvestingYears(); });
       $('#year').textContent = String(new Date().getFullYear());
 
       // Small return-to-top control, hidden until it is useful.
@@ -1503,7 +1703,7 @@
           const shareData = {
             title: 'PrasannaOne',
             text: 'Take a peek at PrasannaOne ✨',
-            url: window.location.href.split('#')[0]
+            url: 'https://x.gd/PrasannaOne'
           };
           try {
             if (navigator.share && (!navigator.canShare || navigator.canShare(shareData))) {
@@ -1534,6 +1734,15 @@
         });
       }
 
+
+      // UPI controls expand inline inside the support rail, never as an overlay.
+      const upiToggle = $('#upiToggle');
+      const upiPanel = $('#upiPanel');
+      upiToggle?.addEventListener('click', () => {
+        const expanded = upiToggle.getAttribute('aria-expanded') === 'true';
+        upiToggle.setAttribute('aria-expanded', String(!expanded));
+        upiPanel.hidden = expanded;
+      });
 
       // UPI amount picker: a quiet validation floor; keep the interface focused on the amount choices.
       const upiId = 'prasannaonerv@okhdfcbank';
@@ -1604,12 +1813,13 @@
         fallback.textContent = '♪';
         art.appendChild(fallback);
         const url = coverUrl(metadata);
+        if (!url) art.classList.add('no-art');
         if (url) {
           const image = document.createElement('img');
           image.loading = 'lazy';
           image.alt = '';
           image.src = url;
-          image.addEventListener('error', () => image.remove(), { once: true });
+          image.addEventListener('error', () => { image.remove(); art.classList.add('no-art'); }, { once: true });
           image.addEventListener('load', () => fallback.remove(), { once: true });
           art.appendChild(image);
         }
