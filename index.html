@@ -1112,6 +1112,38 @@
     .rework-card .project-links { display:flex; flex-wrap:wrap; gap:16px; margin-top:auto; padding-top:3px; }
     .rework-card .project-links a { color:var(--white); font-size:11px; }
     .rework-card .project-links a:hover { color:var(--card-accent); }
+
+    /* Project actions: quiet source links, balanced optional download, restrained live action. */
+    .rework-card .project-links {
+      width:100%; display:grid; grid-template-columns:minmax(0,1fr) auto;
+      align-items:center; column-gap:10px; margin-top:auto; padding-top:3px;
+    }
+    #deepcalc .project-links { grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
+    .rework-card .project-links a { min-width:0; white-space:nowrap; text-decoration:none; }
+    .rework-card .project-links .project-source {
+      justify-self:start; color:rgba(255,250,244,.58); font-size:10px; font-weight:600;
+    }
+    .rework-card .project-links .project-apk {
+      justify-self:center; color:rgba(255,250,244,.76); font-size:10px; font-weight:650;
+    }
+    .rework-card .project-links .project-live {
+      justify-self:end; display:inline-flex; align-items:center; justify-content:center; gap:7px;
+      min-height:34px; padding:0 12px; border:1px solid rgba(255,250,244,.15);
+      border-radius:999px; color:rgba(255,250,244,.88); background:rgba(255,250,244,.045);
+      font-size:10px; font-weight:650; transition:background .2s,border-color .2s,color .2s;
+    }
+    .rework-card .project-links .project-live:hover {
+      color:var(--white); border-color:color-mix(in srgb,var(--card-accent) 42%,transparent);
+      background:color-mix(in srgb,var(--card-accent) 10%,transparent);
+    }
+    .rework-card .project-links .project-live span { margin-left:0; }
+    .rework-card .project-links .project-source:hover,
+    .rework-card .project-links .project-apk:hover { color:var(--card-accent); }
+    @media (max-width:420px) {
+      .rework-card .project-links { column-gap:7px; }
+      .rework-card .project-links .project-live { padding-inline:9px; font-size:9px; }
+    }
+
     .neruko-card { --card-accent:#c4a7ff; }
     #neruko { --card-accent:#c4a7ff; }
     #airwave { --card-accent:#a99bff; }
@@ -1780,9 +1812,9 @@ body[data-theme="dark"] .community-card {
               </div>
               <h3>Neruko</h3>
               <p>An anonymous space for group conversations and private messages.</p>
-              <div class="project-links">
-                <a href="https://neruko.prasannaone.workers.dev/" target="_blank" rel="noopener noreferrer">Open Neruko <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/Neruko" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="neruko links">
+                <a class="project-source" href="https://github.com/PrasannaOne/Neruko" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://neruko.prasannaone.workers.dev/" target="_blank" rel="noopener noreferrer">Open Neruko <span>↗</span></a>
               </div>
             </article>
           </div>
@@ -1794,25 +1826,25 @@ body[data-theme="dark"] .community-card {
             <article class="rework-card" id="airwave">
               <div class="rework-top">
                 <span class="rework-icon airwave-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-                <span class="rework-type">RADIO · DISCOVERY</span>
+                <span class="rework-type">RADIO · PWA</span>
               </div>
               <h3>Airwave</h3>
               <p>Explore radio stations from around the world.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/Airwave/" target="_blank" rel="noopener noreferrer">Listen <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/Airwave" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="airwave links">
+                <a class="project-source" href="https://github.com/PrasannaOne/Airwave" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/Airwave/" target="_blank" rel="noopener noreferrer">Listen <span>↗</span></a>
               </div>
             </article>
             <article class="rework-card" id="airwave-tamil">
               <div class="rework-top">
                 <span class="rework-icon tamil-icon" aria-hidden="true">அ</span>
-                <span class="rework-type">TAMIL RADIO</span>
+                <span class="rework-type">TAMIL RADIO · PWA</span>
               </div>
               <h3>Airwave Tamil</h3>
               <p>A focused radio experience for Tamil listeners.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/Airwave-Tamil/" target="_blank" rel="noopener noreferrer">Listen <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/Airwave-Tamil" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="airwave-tamil links">
+                <a class="project-source" href="https://github.com/PrasannaOne/Airwave-Tamil" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/Airwave-Tamil/" target="_blank" rel="noopener noreferrer">Listen <span>↗</span></a>
               </div>
             </article>
           </div>
@@ -1824,25 +1856,25 @@ body[data-theme="dark"] .community-card {
             <article class="rework-card" id="bounce-tales">
               <div class="rework-top">
                 <span class="rework-icon bounce-icon" aria-hidden="true"><i></i></span>
-                <span class="rework-type">GAME · REBUILD</span>
+                <span class="rework-type">GAME · WEB / PWA</span>
               </div>
               <h3>Bounce Tales</h3>
               <p>A browser rebuild inspired by the classic mobile game.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/BounceTales/" target="_blank" rel="noopener noreferrer">Play <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/BounceTales" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="bounce-tales links">
+                <a class="project-source" href="https://github.com/PrasannaOne/BounceTales" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/BounceTales/" target="_blank" rel="noopener noreferrer">Play <span>↗</span></a>
               </div>
             </article>
             <article class="rework-card" id="2048-upgrade">
               <div class="rework-top">
                 <span class="rework-icon tiles-icon" aria-hidden="true"><i>2</i><i>0</i><i>4</i><i>8</i></span>
-                <span class="rework-type">PUZZLE · WEB / PWA</span>
+                <span class="rework-type">PUZZLE · PWA</span>
               </div>
               <h3>2048 Upgrade</h3>
               <p>A refreshed take on the familiar number puzzle.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/2048-Upgrade/" target="_blank" rel="noopener noreferrer">Play <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/2048-Upgrade" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="2048-upgrade links">
+                <a class="project-source" href="https://github.com/PrasannaOne/2048-Upgrade" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/2048-Upgrade/" target="_blank" rel="noopener noreferrer">Play <span>↗</span></a>
               </div>
             </article>
           </div>
@@ -1858,22 +1890,22 @@ body[data-theme="dark"] .community-card {
               </div>
               <h3>DeepCalc</h3>
               <p>A calculation workspace, available on the web and Android.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/DeepCalc/" target="_blank" rel="noopener noreferrer">Web app <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/DeepCalc/releases/latest" target="_blank" rel="noopener noreferrer">Android APK <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/DeepCalc" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="DeepCalc links">
+                <a class="project-source" href="https://github.com/PrasannaOne/DeepCalc" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-apk" href="https://github.com/PrasannaOne/DeepCalc/releases/latest" target="_blank" rel="noopener noreferrer">APK <span>↓</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/DeepCalc/" target="_blank" rel="noopener noreferrer">Open web app <span>↗</span></a>
               </div>
             </article>
             <article class="rework-card" id="brilliant-calc">
               <div class="rework-top">
                 <span class="rework-icon brilliant-icon" aria-hidden="true">✳</span>
-                <span class="rework-type">CALCULATOR · EXPERIMENT</span>
+                <span class="rework-type">CALCULATOR · PWA</span>
               </div>
               <h3>The Brilliant Calc</h3>
               <p>A playful calculator with a hidden extra.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/The-brilliant-Calc/" target="_blank" rel="noopener noreferrer">Try it <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/The-brilliant-Calc" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="brilliant-calc links">
+                <a class="project-source" href="https://github.com/PrasannaOne/The-brilliant-Calc" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/The-brilliant-Calc/" target="_blank" rel="noopener noreferrer">Try it <span>↗</span></a>
               </div>
             </article>
           </div>
@@ -1885,25 +1917,25 @@ body[data-theme="dark"] .community-card {
             <article class="rework-card" id="skylight">
               <div class="rework-top">
                 <span class="rework-icon skylight-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-                <span class="rework-type">CREATIVE CANVAS</span>
+                <span class="rework-type">CREATIVE · PWA</span>
               </div>
               <h3>SkyLight</h3>
               <p>An open sky for making and saving constellations.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/SkyLight/" target="_blank" rel="noopener noreferrer">Explore <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/SkyLight" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="skylight links">
+                <a class="project-source" href="https://github.com/PrasannaOne/SkyLight" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/SkyLight/" target="_blank" rel="noopener noreferrer">Open project <span>↗</span></a>
               </div>
             </article>
             <article class="rework-card" id="arc-spinner">
               <div class="rework-top">
                 <span class="rework-icon arc-icon" aria-hidden="true"><i></i></span>
-                <span class="rework-type">MOTION EXPERIMENT</span>
+                <span class="rework-type">MOTION · PWA</span>
               </div>
               <h3>The Arc Spinner</h3>
               <p>A small interactive experiment in motion.</p>
-              <div class="project-links">
-                <a href="https://prasannaone.github.io/The-Arc-Spinner/" target="_blank" rel="noopener noreferrer">Explore <span>↗</span></a>
-                <a href="https://github.com/PrasannaOne/The-Arc-Spinner" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+              <div class="project-links" aria-label="arc-spinner links">
+                <a class="project-source" href="https://github.com/PrasannaOne/The-Arc-Spinner" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
+                <a class="project-live" href="https://prasannaone.github.io/The-Arc-Spinner/" target="_blank" rel="noopener noreferrer">Open project <span>↗</span></a>
               </div>
             </article>
           </div>
