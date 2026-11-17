@@ -1,32 +1,33 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#17151b">
-  <meta name="description" content="Prasanna One is a personal corner of the internet for independent projects, useful tools, games and experiments.">
-  <meta property="og:title" content="PrasannaOne">
-  <meta property="og:description" content="PrasannaOne.">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="PrasannaOne">
-  <meta property="og:locale" content="en_IN">
-  <meta name="application-name" content="PrasannaOne">
-  <meta property="og:url" content="https://prasannaone.github.io/">
-  <meta property="og:image" content="https://prasannaone.github.io/og-preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PrasannaOne">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="PrasannaOne">
-  <meta name="twitter:description" content="PrasannaOne.">
-  <meta name="twitter:image" content="https://prasannaone.github.io/og-preview.png">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2218%22 fill=%22%23222027%22/%3E%3Ctext x=%2232%22 y=%2245%22 text-anchor=%22middle%22 font-family=%22Arial,sans-serif%22 font-size=%2243%22 font-weight=%22700%22 fill=%22%23fffaf4%22%3EP%3C/text%3E%3C/svg%3E">
-  <meta name="apple-mobile-web-app-title" content="PrasannaOne">
-  <title>PrasannaOne</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#17151b" name="theme-color"/>
+<meta content="PrasannaOne is a collection of independent projects, tools, games and experiments." name="description"/>
+<meta content="PrasannaOne" property="og:title"/>
+<meta content="PrasannaOne." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="PrasannaOne" property="og:site_name"/>
+<meta content="en_IN" property="og:locale"/>
+<meta content="PrasannaOne" name="application-name"/>
+<meta content="https://prasannaone.github.io/" property="og:url"/>
+<meta content="https://prasannaone.github.io/og-preview.png" property="og:image"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="PrasannaOne" property="og:image:alt"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="PrasannaOne" name="twitter:title"/>
+<meta content="PrasannaOne." name="twitter:description"/>
+<meta content="https://prasannaone.github.io/og-preview.png" name="twitter:image"/>
+<link href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2218%22 fill=%22%23222027%22/%3E%3Ctext x=%2232%22 y=%2245%22 text-anchor=%22middle%22 font-family=%22Arial,sans-serif%22 font-size=%2243%22 font-weight=%22700%22 fill=%22%23fffaf4%22%3EP%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+<meta content="PrasannaOne" name="apple-mobile-web-app-title"/>
+<title>PrasannaOne</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&amp;family=DM+Mono:wght@400;500&amp;family=DM+Sans:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       color-scheme: light;
       --paper: #eee9e3;
@@ -1068,9 +1069,82 @@
   .arc-spinner,.deepcalc-cursor { animation:none !important; }
 }
 
-</style>
 
-  <style>
+    /* Expandable project catalogue: native details keeps content crawlable and keyboard-accessible. */
+    .category > summary { list-style: none; cursor: pointer; }
+    .category > summary::-webkit-details-marker { display: none; }
+    .category-head { position: relative; padding-right: 28px; }
+    .category-head::after {
+      content: "+";
+      position: absolute;
+      right: 2px;
+      top: 0;
+      color: #d8c4d3;
+      font: 500 18px/1 var(--display);
+      transition: transform 160ms var(--ease);
+    }
+    .category[open] > .category-head::after { content: "−"; }
+    .category > summary:focus-visible { outline: 2px solid var(--coral); outline-offset: 5px; border-radius: 4px; }
+    .category > .rework-grid { padding-top: 2px; }
+
+
+    /* Project catalogue v2: visible categories, compact individual project tabs. */
+    .category { margin-top: clamp(28px,4vw,42px); }
+    .category:first-of-type { margin-top: 0; }
+    .category-head { display:flex; align-items:center; justify-content:space-between; margin:0 0 10px; padding:0 0 9px; border-bottom:1px solid rgba(255,255,255,.17); }
+    .category-head strong { color:#e9d6d1; font:500 10px/1.4 var(--mono); letter-spacing:.15em; text-transform:uppercase; }
+    .rework-grid.project-tab-list { display:grid; grid-template-columns:minmax(0,1fr); gap:7px; }
+    .project-tab { min-width:0; border:1px solid rgba(255,255,255,.12); border-radius:13px; background:rgba(255,255,255,.035); overflow:hidden; transition:border-color .2s ease,background .2s ease; }
+    .project-tab:hover { border-color:rgba(238,162,155,.42); background:rgba(255,255,255,.055); }
+    .project-tab[open] { border-color:rgba(182,166,201,.42); background:rgba(255,255,255,.045); }
+    .project-tab-head { min-height:78px; display:grid; grid-template-columns:9px minmax(0,1fr) auto 12px; align-items:center; gap:13px; padding:12px 16px; cursor:pointer; list-style:none; }
+    .project-tab-head::-webkit-details-marker { display:none; }
+    .project-tab-head::marker { content:""; }
+    .project-tab-mark { width:7px; height:7px; border-radius:50%; background:var(--coral); box-shadow:0 0 0 4px rgba(238,162,155,.10); }
+    .project-tab-copy { min-width:0; display:flex; flex-direction:column; align-items:flex-start; gap:4px; }
+    .project-tab-name { min-width:0; color:var(--white); font:600 16px/1.2 var(--display); letter-spacing:-.025em; }
+    .project-tab-teaser { max-width:66ch; color:rgba(255,250,244,.62); font-size:11px; line-height:1.45; }
+    .project-tab-kind { color:rgba(255,250,244,.42); font:8px/1.4 var(--mono); letter-spacing:.09em; text-align:right; white-space:nowrap; }
+    .project-tab-toggle { width:9px; height:9px; border-right:1.5px solid #d8c4d3; border-bottom:1.5px solid #d8c4d3; transform:rotate(45deg) translateY(-2px); transition:transform .2s var(--ease),border-color .2s; }
+    .project-tab[open] .project-tab-toggle { transform:rotate(225deg) translate(-1px,-1px); border-color:var(--coral); }
+    .project-tab-head:hover .project-tab-toggle { border-color:var(--coral); }
+    .project-tab-head:active { background:rgba(255,255,255,.055); }
+    .project-tab-panel { padding:0 8px 8px; animation:project-reveal .18s ease-out; }
+    .project-tab-panel .rework-card { min-height:0; padding:17px 18px 16px; border-radius:10px; box-shadow:none; transform:none; }
+    .project-tab-panel .rework-card:hover { transform:none; }
+    .project-tab-panel .rework-card::after { width:110px; height:110px; right:-55px; top:-65px; }
+    .project-tab-panel .rework-top { margin-bottom:12px; }
+    .project-tab-panel .rework-card p { margin:0 0 12px; }
+    .project-tab-panel .rework-card p.project-detail { max-width:72ch; color:rgba(255,250,244,.76); font-size:13px; line-height:1.7; }
+    .project-highlights { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px 22px; margin:0 0 15px; padding:0; list-style:none; }
+    .project-highlights li { position:relative; padding-left:13px; color:rgba(255,250,244,.57); font-size:11px; line-height:1.5; }
+    .project-highlights li::before { content:""; position:absolute; top:.58em; left:0; width:5px; height:5px; border-radius:50%; background:var(--card-accent); }
+    .project-tab-panel .rework-card .project-links { margin-top:0; padding-top:8px; }
+    .project-tab-panel .rework-card .project-links a { min-height:32px; display:inline-flex; align-items:center; }
+    .project-tab-panel .rework-card .project-links .project-source { justify-self:start; }
+    .project-tab-panel .rework-card .project-links .project-live { justify-self:end; }
+    #deepcalc .project-links { grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
+    #deepcalc .project-links .project-apk { justify-self:center; }
+    .nonogram-icon { background:color-mix(in srgb,#9baed8 15%,#211e27); color:#b6c8ed; display:grid; grid-template-columns:repeat(3,6px); grid-template-rows:repeat(3,6px); gap:3px; align-content:center; justify-content:center; }
+    .nonogram-icon i { display:block; width:6px; height:6px; border-radius:1px; background:#b6c8ed; opacity:.9; }
+    .nonogram-icon i:nth-child(2),.nonogram-icon i:nth-child(4),.nonogram-icon i:nth-child(8) { opacity:.25; }
+    @keyframes project-reveal { from { opacity:0; transform:translateY(-3px); } to { opacity:1; transform:translateY(0); } }
+    @media (max-width:600px) {
+      .project-tab-head { min-height:76px; grid-template-columns:8px minmax(0,1fr) 10px; gap:10px; padding:11px 13px; }
+      .project-tab-kind { display:none; }
+      .project-tab-name { font-size:15px; }
+      .project-tab-teaser { font-size:11px; }
+      .project-highlights { grid-template-columns:minmax(0,1fr); gap:6px; }
+      .project-tab-panel { padding:0 6px 6px; }
+      .project-tab-panel .rework-card { padding:15px 14px; }
+      .project-tab-panel .rework-card .project-links { column-gap:7px; }
+      #deepcalc .project-links { grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .project-tab,.project-tab-panel,.project-tab-head { transition:none !important; animation:none !important; }
+    }
+</style>
+<style>
     /* Project gallery redesign: quiet, compact, and intentionally non-literal. */
     .work { padding: clamp(58px,8vw,100px) 0; }
     .work-head { align-items:end; margin-bottom: clamp(34px,5vw,58px); }
@@ -1242,9 +1316,7 @@
     body[data-theme="dark"] .insight-label { color:#d0c4d6; }
 
   </style>
-
-
-  <style>
+<style>
     .listen-profile-link {
       flex:0 0 auto; color:#8c666e; font:500 9px/1.4 var(--mono);
       letter-spacing:.08em; text-transform:uppercase; text-decoration:none;
@@ -1256,9 +1328,7 @@
       .listen-profile-link { font-size:8px; }
     }
   </style>
-
-
-  <style>
+<style>
     /* Tiny loading cues, not large placeholder blocks. */
     .loading-shimmer { color:transparent!important; border-radius:4px; background:linear-gradient(90deg,#e9e1e5 20%,#f5eff1 45%,#e9e1e5 70%); background-size:220% 100%; animation:listenShimmer 1.5s ease-in-out infinite; }
     .listen-skeleton { display:grid; gap:10px; padding:7px 0; }
@@ -1269,9 +1339,7 @@
     @keyframes listenPulse { to { opacity:.45; } }
     @media(prefers-reduced-motion:reduce) { .loading-shimmer,.listen-skeleton i { animation:none; } }
   </style>
-
-
-  <style>
+<style>
     .back-top {
       position:fixed; z-index:30; right:22px; bottom:22px; width:39px; height:39px;
       display:grid; place-items:center; border:1px solid rgba(48,39,49,.14); border-radius:50%;
@@ -1285,9 +1353,7 @@
     .back-top:focus-visible { outline:2px solid #80618e; outline-offset:3px; }
     @media(max-width:600px) { .back-top { right:14px; bottom:14px; width:36px; height:36px; } }
   </style>
-
-
-  <style>
+<style>
     a,button { -webkit-tap-highlight-color:transparent; }
     a:focus-visible,button:focus-visible { outline:2px solid #9277a3; outline-offset:3px; }
     a.link-pressed,button.link-pressed { filter:brightness(.91); transform:translateY(1px) scale(.99); }
@@ -1295,9 +1361,7 @@
     .copy-feedback { transition:color .18s; }
     @media(prefers-reduced-motion:reduce) { .link-pressed { transform:none!important; } }
   </style>
-
-
-  <style>
+<style>
     /* Final polish: dark-only palette, a contained monogram and an inline UPI expander. */
     :root { color-scheme: dark; }
     body { color-scheme: dark; }
@@ -1389,9 +1453,7 @@
     }
     @media (prefers-reduced-motion:reduce) { .upi-panel { animation:none; } }
   </style>
-
-
-  <style>
+<style>
     /* Latest visual tidy-up: distinguish support, simplify the profile mark, and tighten vertical rhythm. */
     .support-rail {
       padding-block: 12px;
@@ -1469,9 +1531,7 @@
       .profile-monogram { right: 16px; font-size: 58px; }
     }
   </style>
-
-
-  <style>
+<style>
     /* PrasannaOne final visual pass: one support panel, atmospheric profile, and expressive contact links. */
     :root { color-scheme: dark; }
     body { color-scheme: dark; background: #17151b; }
@@ -1711,338 +1771,372 @@ body[data-theme="dark"] .community-card {
   .community-join { width: 100%; }
 }
 
+
+
+    /* Hybrid editorial polish: category colour is a cue, never the whole message. */
+    .category-head strong { display:inline-flex; align-items:center; gap:10px; }
+    .category-head strong::before { content:""; width:7px; height:7px; flex:0 0 7px; border-radius:50%; background:#b9a6d4; box-shadow:0 0 0 3px rgba(185,166,212,.10); }
+    .category:nth-of-type(2) .category-head strong::before { background:#a99bff; box-shadow:0 0 0 3px rgba(169,155,255,.10); }
+    .category:nth-of-type(3) .category-head strong::before { background:#e3a1a0; box-shadow:0 0 0 3px rgba(227,161,160,.10); }
+    .category:nth-of-type(4) .category-head strong::before { background:#9bc8b3; box-shadow:0 0 0 3px rgba(155,200,179,.10); }
+    .category:nth-of-type(5) .category-head strong::before { background:#c69cda; box-shadow:0 0 0 3px rgba(198,156,218,.10); }
+    .category-head { transition:color .16s ease, border-color .16s ease; }
+    .category > summary:active { color:#f0c5bc; }
+    .rework-card:focus-within { border-color:color-mix(in srgb,var(--card-accent) 52%,transparent); }
+    .rework-card .project-links a:focus-visible,
+    .community-join:focus-visible,
+    .social-link:focus-visible,
+    .footer-actions a:focus-visible { outline:2px solid var(--coral); outline-offset:4px; border-radius:6px; }
+    .rework-card .project-live:active,
+    .community-join:active,
+    .socials a.social-link:active { transform:translateY(0) scale(.985); }
+    @media(prefers-reduced-motion:reduce) {
+      .category-head,.rework-card,.rework-card .project-live,.community-join,.socials a.social-link { transition:none !important; }
+      .rework-card .project-live:active,.community-join:active,.socials a.social-link:active { transform:none; }
+    }
+
+</style>
+
+<style id="prasannaone-spacing-motion-pass">
+  /* Compact rhythm and low-cost motion polish. */
+  .about { padding-top: clamp(46px, 5.8vw, 70px); padding-bottom: 54px; }
+  .about-head { margin-bottom: 18px; }
+  .about-grid { gap: 11px; }
+  .profile-card { min-height: 218px; padding: 22px 24px; }
+  .about-copy { gap: 13px; padding: clamp(19px, 2.5vw, 25px); }
+  .about-copy p { line-height: 1.68; }
+  .contact-row { margin-top: 13px; }
+  .community-card { margin-top: 20px; }
+  .profile-card, .about-copy, .contact-row, .community-card {
+    transition: border-color .28s ease, background-color .28s ease, transform .28s ease;
+  }
+  .profile-card:hover, .about-copy:hover { border-color: rgba(230,190,207,.3); }
+  .socials a.social-link { transition: transform .22s ease, border-color .22s ease, background-color .22s ease; }
+  .motion-reveal { opacity: 0; transform: translate3d(0, 13px, 0); }
+  .motion-reveal.is-visible { opacity: 1; transform: translate3d(0, 0, 0); transition: opacity .52s ease, transform .52s cubic-bezier(.2,.7,.2,1); }
+  @media (max-width:680px) {
+    .about { padding: 43px 0 43px; }
+    .about-head { margin-bottom: 16px; }
+    .about-grid { gap: 10px; }
+    .profile-card { min-height: 184px; padding: 19px 18px; gap: 14px; }
+    .about-copy { gap: 11px; padding: 18px; }
+    .about-copy p { line-height: 1.62; }
+    .contact-row { margin-top: 11px; padding-top: 17px; }
+    .community-card { margin-top: 17px; }
+  }
+  @media (max-width:370px) {
+    .profile-card { min-height: 174px; }
+  }
+  @media (hover:none) {
+    .profile-card:hover, .about-copy:hover { transform: none; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .motion-reveal, .motion-reveal.is-visible { opacity: 1; transform: none; transition: none !important; }
+    .profile-card, .about-copy, .contact-row, .community-card, .socials a.social-link { transition: none !important; }
+  }
 </style>
 
 </head>
 <body data-theme="dark">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <header class="header" id="top">
-    <div class="header-inner">
-      <a class="mark" href="#home" aria-label="Back to the beginning">P.</a>
-      <nav class="top-nav" aria-label="Main navigation">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <button class="share-site top-share" id="shareSite" type="button" aria-label="Share PrasannaOne">↗ Share</button>
-        <a class="nav-hello" href="#contact">Say hello ↗</a>
-      </nav>
-    </div>
-  </header>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="header" id="top">
+<div class="header-inner">
+<a aria-label="Back to the beginning" class="mark" href="#home">P.</a>
+<nav aria-label="Main navigation" class="top-nav">
+<a href="#work">Work</a>
+<a href="#about">About</a>
+<button aria-label="Share PrasannaOne" class="share-site top-share" id="shareSite" type="button">↗ Share</button>
+<a class="nav-hello" href="#contact">Say hello ↗</a>
+</nav>
+</div>
+</header>
+<aside aria-label="Support this work" class="support-rail" id="support">
+<div class="support-inner">
+<div class="support-main">
+<div class="support-copy">
+<span aria-hidden="true" class="support-spark"></span>
+<div><strong>Support PrasannaOne</strong></div>
+</div>
+<div class="support-actions">
+<a class="support-link kofi" href="https://ko-fi.com/PrasannaOne" rel="noopener noreferrer" target="_blank"><svg aria-label="Ko-fi" class="kofi-mark" focusable="false" role="img" viewbox="0 0 24 24"><path d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z" fill="#FF5E5B"></path></svg> <span>Buy me a coffee</span> <span aria-hidden="true" class="arrow">↗</span></a>
+<button aria-controls="upiPanel" aria-expanded="false" class="upi-trigger" id="upiToggle" type="button">🇮🇳 Pay via UPI <span aria-hidden="true" class="upi-chevron">⌄</span></button>
+</div>
+</div>
+<div class="upi-panel" hidden="" id="upiPanel">
+<div class="upi-panel-grid">
+<div>
+<label>Choose an amount</label>
+<div aria-label="UPI tip amount" class="amount-options" role="group">
+<button aria-pressed="true" class="amount-choice" data-amount="20" type="button">₹20</button>
+<button aria-pressed="false" class="amount-choice" data-amount="50" type="button">₹50</button>
+<button aria-pressed="false" class="amount-choice" data-amount="100" type="button">₹100</button>
+<button aria-pressed="false" class="amount-choice" data-amount="200" type="button">₹200</button>
+</div>
+</div>
+<div>
+<label for="upiAmount">Or enter another amount</label>
+<div class="amount-entry"><span>₹</span><input aria-describedby="upiHint upiFeedback" id="upiAmount" inputmode="numeric" min="20" step="1" type="number" value="20"/></div>
+</div>
+</div>
+<p class="upi-hint" id="upiHint">Choose a suggested amount or enter your own.</p>
+<div class="upi-pop-actions"><button class="upi-copy" id="copyUpi" type="button">Copy UPI ID</button><button class="upi-pay" id="payUpi" type="button">Continue to UPI ↗</button></div>
+<p aria-live="polite" class="upi-feedback" id="upiFeedback" role="status"></p>
+</div>
+</div>
+</aside>
+<main id="main-content" tabindex="-1">
+<section class="hero" id="home">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<div class="hero-kicker eyebrow">Based in Tamil Nadu, India</div>
+<h1 class="hero-name">Prasanna <small>ONE</small></h1>
+<p class="hero-tagline">Ideas become <em>things.</em></p>
+<p class="hero-description">I build independent tools, tiny worlds and playful digital experiences, guided by curiosity about people, markets and technology.</p>
+<div class="hero-ctas"><a class="button" href="#work">Explore the work <span class="arrow">↘</span></a></div>
+</div>
+<div aria-label="A playful collage inspired by a chat room, a radio dial and a classic platform game" class="hero-scene" role="img">
+<div class="scene-wash"></div><div class="scene-ring"></div>
+<div class="scene-window scene-chat">
+<div class="scene-window-head"><strong>neruko.</strong><small>● ROOM OPEN</small></div>
+<div class="chat-line">Anyone around?</div><div class="chat-line mine">Hey, what's up 👋</div><div class="chat-line">Found this room by chance.</div>
+</div>
+<div class="scene-window scene-radio">
+<div class="radio-kicker">A WORLD OF SOUND</div><strong class="radio-name">AIRWAVE</strong>
+<div aria-hidden="true" class="radio-dial"><i style="--bar:13px"></i><i style="--bar:21px"></i><i style="--bar:29px"></i><i style="--bar:17px"></i><i style="--bar:35px"></i><i style="--bar:24px"></i><i style="--bar:14px"></i><i style="--bar:31px"></i><i style="--bar:19px"></i><i style="--bar:26px"></i><i style="--bar:12px"></i></div>
+</div>
+<div class="scene-tile"><span>24</span><small>PLAY A LITTLE</small></div>
+</div>
+</div>
+</section>
+<section class="work" id="work">
+<div class="wrap">
+<div class="work-head">
+<div>
+<h2>Projects</h2>
+</div>
+<div aria-live="polite" class="work-index" id="projectCount">10 PROJECTS</div>
+</div>
+<section class="category">
+<div class="category-head"><strong>01 / Social</strong></div>
+<div class="rework-grid project-tab-list">
+<details class="project-tab" data-project="neruko"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">Neruko</span><span class="project-tab-teaser">Meet people nearby through spontaneous group conversations and rooms tied to places.</span></span><span class="project-tab-kind">SOCIAL · LIVE</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card featured" id="neruko">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon neruko-icon"><i></i><i></i><i></i></span>
+<span class="rework-type">SOCIAL · LIVE</span>
+</div>
 
-  <aside class="support-rail" id="support" aria-label="Support this work">
-    <div class="support-inner">
-      <div class="support-main">
-        <div class="support-copy">
-          <span class="support-spark" aria-hidden="true"></span>
-          <div><strong>Support independent work</strong><small>Help keep these projects growing</small></div>
-        </div>
-        <div class="support-actions">
-          <a class="support-link kofi" href="https://ko-fi.com/PrasannaOne" target="_blank" rel="noopener noreferrer"><svg class="kofi-mark" viewBox="0 0 24 24" role="img" aria-label="Ko-fi" focusable="false"><path fill="#FF5E5B" d="M23.881 8.948c-.773-4.085-4.859-4.593-4.859-4.593H.723c-.604 0-.679.798-.679.798s-.082 7.324-.022 11.822c.164 2.424 2.586 2.672 2.586 2.672s8.267-.023 11.966-.049c2.438-.426 2.683-2.566 2.658-3.734 4.352.24 7.422-2.831 6.649-6.916zm-11.062 3.511c-1.246 1.453-4.011 3.976-4.011 3.976s-.121.119-.31.023c-.076-.057-.108-.09-.108-.09-.443-.441-3.368-3.049-4.034-3.954-.709-.965-1.041-2.7-.091-3.71.951-1.01 3.005-1.086 4.363.407 0 0 1.565-1.782 3.468-.963 1.904.82 1.832 3.011.723 4.311zm6.173.478c-.928.116-1.682.028-1.682.028V7.284h1.77s1.971.551 1.971 2.638c0 1.913-.985 2.667-2.059 3.015z"/></svg> <span>Buy me a coffee</span> <span class="arrow" aria-hidden="true">↗</span></a>
-          <button class="upi-trigger" id="upiToggle" type="button" aria-expanded="false" aria-controls="upiPanel">🇮🇳 Pay via UPI <span class="upi-chevron" aria-hidden="true">⌄</span></button>
-        </div>
-      </div>
-      <div class="upi-panel" id="upiPanel" hidden>
-        <div class="upi-panel-grid">
-          <div>
-            <label>Choose an amount</label>
-            <div class="amount-options" role="group" aria-label="UPI tip amount">
-              <button class="amount-choice" type="button" data-amount="20" aria-pressed="true">₹20</button>
-              <button class="amount-choice" type="button" data-amount="50" aria-pressed="false">₹50</button>
-              <button class="amount-choice" type="button" data-amount="100" aria-pressed="false">₹100</button>
-              <button class="amount-choice" type="button" data-amount="200" aria-pressed="false">₹200</button>
-            </div>
-          </div>
-          <div>
-            <label for="upiAmount">Or enter another amount</label>
-            <div class="amount-entry"><span>₹</span><input id="upiAmount" type="number" inputmode="numeric" min="20" step="1" value="20" aria-describedby="upiHint upiFeedback"></div>
-          </div>
-        </div>
-        <p class="upi-hint" id="upiHint">Choose a suggested amount or enter your own.</p>
-        <div class="upi-pop-actions"><button class="upi-copy" id="copyUpi" type="button">Copy UPI ID</button><button class="upi-pay" id="payUpi" type="button">Continue to UPI ↗</button></div>
-        <p class="upi-feedback" id="upiFeedback" role="status" aria-live="polite"></p>
-      </div>
-    </div>
-  </aside>
+<p class="project-detail">Neruko brings people together through spontaneous conversations shaped by physical proximity. Join a nearby group conversation, discover rooms created for people around a place, or start a room of your own. It is a social space built around who is nearby, rather than who you already know.</p><ul class="project-highlights"><li>Nearby group conversations for spontaneous encounters</li><li>Public or private rooms connected to a place</li><li>Private friend messaging when a conversation continues</li></ul>
+<div aria-label="neruko links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/Neruko" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://neruko.prasannaone.workers.dev/" rel="noopener noreferrer" target="_blank">Open Neruko <span>↗</span></a>
+</div>
+</article></div></details>
+</div>
+</section>
+<section class="category">
+<div class="category-head"><strong>02 / Audio</strong></div>
+<div class="rework-grid project-tab-list">
+<details class="project-tab" data-project="airwave"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">Airwave</span><span class="project-tab-teaser">Find a station somewhere in the world, and let it play.</span></span><span class="project-tab-kind">RADIO · PWA</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="airwave">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon airwave-icon"><i></i><i></i><i></i><i></i></span>
+<span class="rework-type">RADIO · PWA</span>
+</div>
 
-  <main id="main-content" tabindex="-1">
-    <section class="hero" id="home">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <div class="hero-kicker eyebrow">Based in Tamil Nadu, India</div>
-          <h1 class="hero-name">Prasanna <small>ONE</small></h1>
-          <p class="hero-tagline">Ideas become <em>things.</em></p>
-          <p class="hero-description">I build independent tools, tiny worlds and playful digital experiences, guided by curiosity about people, markets and technology.</p>
-          <div class="hero-ctas"><a class="button" href="#work">Explore the work <span class="arrow">↘</span></a><a class="button secondary" href="#about">A little about me</a></div>
-          <div class="hero-note">A personal corner of the internet</div>
-        </div>
-        <div class="hero-scene" role="img" aria-label="A playful collage inspired by a chat room, a radio dial and a classic platform game">
-          <div class="scene-wash"></div><div class="scene-ring"></div>
-          <div class="scene-chip one"><span class="dot"></span> Things in motion</div>
-          <div class="scene-window scene-chat">
-            <div class="scene-window-head"><strong>neruko.</strong><small>● ROOM OPEN</small></div>
-            <div class="chat-line">Anyone around?</div><div class="chat-line mine">Hey, what's up 👋</div><div class="chat-line">Found this room by chance.</div>
-          </div>
-          <div class="scene-window scene-radio">
-            <div class="radio-kicker">A WORLD OF SOUND</div><strong class="radio-name">AIRWAVE</strong>
-            <div class="radio-dial" aria-hidden="true"><i style="--bar:13px"></i><i style="--bar:21px"></i><i style="--bar:29px"></i><i style="--bar:17px"></i><i style="--bar:35px"></i><i style="--bar:24px"></i><i style="--bar:14px"></i><i style="--bar:31px"></i><i style="--bar:19px"></i><i style="--bar:26px"></i><i style="--bar:12px"></i></div>
-          </div>
-          <div class="scene-tile"><span>24</span><small>PLAY A LITTLE</small></div>
-          <div class="scene-chip two"><span class="dot"></span> Built for curiosity</div>
-          <div class="scene-scribble">made with intent ✳</div>
-        </div>
-      </div>
-    </section>
+<p class="project-detail">Airwave brings a catalogue of more than 63,000 internet radio stations into one browser-based listening space. Search by station, country, language or genre, then save favourites and return to recent listens.</p><ul class="project-highlights"><li>Worldwide station discovery with search and filters</li><li>Favourites, recent stations and Surprise Me</li><li>Persistent mini-player, sleep timer and five themes</li></ul>
+<div aria-label="airwave links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/Airwave" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://prasannaone.github.io/Airwave/" rel="noopener noreferrer" target="_blank">Listen <span>↗</span></a>
+</div>
+</article></div></details>
+<details class="project-tab" data-project="airwave-tamil"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">Airwave Tamil</span><span class="project-tab-teaser">A dedicated listening corner for Tamil radio, wherever you are.</span></span><span class="project-tab-kind">TAMIL RADIO · PWA</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="airwave-tamil">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon tamil-icon">அ</span>
+<span class="rework-type">TAMIL RADIO · PWA</span>
+</div>
 
-    <section class="work" id="work">
-      <div class="wrap">
-        <div class="work-head">
-          <div>
-            <div class="eyebrow">A collection of independent builds</div>
-            <h2>Made with curiosity.<br><em>Built to be used.</em></h2>
-          </div>
-          <div class="work-index">09 PROJECTS</div>
-        </div>
+<p class="project-detail">Airwave Tamil focuses on Tamil-language radio stations, bringing them together in a simple bilingual listening experience. Browse or search, save stations you love, and keep playback close while exploring.</p><ul class="project-highlights"><li>Tamil-focused station catalogue</li><li>Tamil and English interface</li><li>Favourites, recent stations, hide controls and five themes</li></ul>
+<div aria-label="airwave-tamil links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/Airwave-Tamil" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://prasannaone.github.io/Airwave-Tamil/" rel="noopener noreferrer" target="_blank">Listen <span>↗</span></a>
+</div>
+</article></div></details>
+</div>
+</section>
+<section class="category">
+<div class="category-head"><strong>03 / Games</strong></div>
+<div class="rework-grid project-tab-list"><details class="project-tab" data-project="nonogram"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">Nonogram</span><span class="project-tab-teaser">A quiet little puzzle: read the clues, fill the grid, reveal the picture.</span></span><span class="project-tab-kind">LOGIC GAME · WEB / PWA</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="nonogram"><div class="rework-top"><span aria-hidden="true" class="rework-icon nonogram-icon"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="rework-type">LOGIC GAME · WEB / PWA</span></div><p class="project-detail">Nonogram is an endless picture-logic game. Row and column clues guide each puzzle, while independently saved Easy, Normal and Hard journeys keep the next challenge coming. It opens straight on the game, with no title-screen detour.</p><ul class="project-highlights"><li>Three difficulty profiles with separate progress</li><li>Uniquely validated generated puzzles and shuffled grid sizes</li><li>Touch and drag controls, undo, hints, six themes and local saves</li></ul><div aria-label="Nonogram links" class="project-links"><a class="project-source" href="https://github.com/PrasannaOne/Nonogram" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a><a class="project-live" href="https://prasannaone.github.io/Nonogram/" rel="noopener noreferrer" target="_blank">Play Nonogram <span>↗</span></a></div></article></div></details>
+<details class="project-tab" data-project="bounce-tales"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">Bounce Tales</span><span class="project-tab-teaser">A familiar little red ball, rebuilt for today’s browsers and screens.</span></span><span class="project-tab-kind">GAME · WEB / PWA</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="bounce-tales">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon bounce-icon"><i></i></span>
+<span class="rework-type">GAME · WEB / PWA</span>
+</div>
 
-        <div class="category">
-          <div class="category-head"><strong>01 / Social</strong><span>Small spaces to connect</span></div>
-          <div class="rework-grid">
-            <article class="rework-card featured" id="neruko">
-              <div class="rework-top">
-                <span class="rework-icon neruko-icon" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="rework-type">SOCIAL · LIVE</span>
-              </div>
-              <h3>Neruko</h3>
-              <p>An anonymous space for group conversations and private messages.</p>
-              <div class="project-links" aria-label="neruko links">
-                <a class="project-source" href="https://github.com/PrasannaOne/Neruko" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://neruko.prasannaone.workers.dev/" target="_blank" rel="noopener noreferrer">Open Neruko <span>↗</span></a>
-              </div>
-            </article>
-          </div>
-        </div>
+<p class="project-detail">Bounce Tales is an independent HTML5 reconstruction of the classic Java ME platform game, informed by recovered game resources and decompiled bytecode. It brings the campaign and its familiar movement into a responsive browser experience.</p><ul class="project-highlights"><li>15 campaign stages with chapter progression</li><li>Touch, keyboard and supported gamepad controls</li><li>Responsive play area, checkpoints, collectibles and local progress</li></ul>
+<div aria-label="bounce-tales links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/BounceTales" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://prasannaone.github.io/BounceTales/" rel="noopener noreferrer" target="_blank">Play <span>↗</span></a>
+</div>
+</article></div></details>
+<details class="project-tab" data-project="2048-upgrade"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">2048 Upgrade</span><span class="project-tab-teaser">Slide, merge and chase the next number in a focused 2048 puzzle.</span></span><span class="project-tab-kind">PUZZLE · PWA</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="2048-upgrade">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon tiles-icon"><i>2</i><i>0</i><i>4</i><i>8</i></span>
+<span class="rework-type">PUZZLE · PWA</span>
+</div>
 
-        <div class="category">
-          <div class="category-head"><strong>02 / Audio</strong><span>Find your frequency</span></div>
-          <div class="rework-grid">
-            <article class="rework-card" id="airwave">
-              <div class="rework-top">
-                <span class="rework-icon airwave-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-                <span class="rework-type">RADIO · PWA</span>
-              </div>
-              <h3>Airwave</h3>
-              <p>Explore radio stations from around the world.</p>
-              <div class="project-links" aria-label="airwave links">
-                <a class="project-source" href="https://github.com/PrasannaOne/Airwave" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/Airwave/" target="_blank" rel="noopener noreferrer">Listen <span>↗</span></a>
-              </div>
-            </article>
-            <article class="rework-card" id="airwave-tamil">
-              <div class="rework-top">
-                <span class="rework-icon tamil-icon" aria-hidden="true">அ</span>
-                <span class="rework-type">TAMIL RADIO · PWA</span>
-              </div>
-              <h3>Airwave Tamil</h3>
-              <p>A focused radio experience for Tamil listeners.</p>
-              <div class="project-links" aria-label="airwave-tamil links">
-                <a class="project-source" href="https://github.com/PrasannaOne/Airwave-Tamil" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/Airwave-Tamil/" target="_blank" rel="noopener noreferrer">Listen <span>↗</span></a>
-              </div>
-            </article>
-          </div>
-        </div>
+<p class="project-detail">A streamlined take on the familiar number-merging puzzle, designed to stay out of the way and keep the board front and centre. The game remembers your progress and supports full-screen swipes across the play area.</p><ul class="project-highlights"><li>Swipe anywhere to move tiles</li><li>Up to 15 steps of undo history</li><li>Haptic and audio feedback, light and OLED-dark themes</li></ul>
+<div aria-label="2048-upgrade links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/2048-Upgrade" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://prasannaone.github.io/2048-Upgrade/" rel="noopener noreferrer" target="_blank">Play <span>↗</span></a>
+</div>
+</article></div></details>
+</div>
+</section>
+<section class="category">
+<div class="category-head"><strong>04 / Tools</strong></div>
+<div class="rework-grid project-tab-list">
+<details class="project-tab" data-project="deepcalc"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">DeepCalc</span><span class="project-tab-teaser">A calculation notepad where working, notes and answers stay together.</span></span><span class="project-tab-kind">CALCULATOR · WEB + ANDROID</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="deepcalc">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon deepcalc-icon">∑</span>
+<span class="rework-type">CALCULATOR · WEB + ANDROID</span>
+</div>
 
-        <div class="category">
-          <div class="category-head"><strong>03 / Games</strong><span>Play, preserve, repeat</span></div>
-          <div class="rework-grid">
-            <article class="rework-card" id="bounce-tales">
-              <div class="rework-top">
-                <span class="rework-icon bounce-icon" aria-hidden="true"><i></i></span>
-                <span class="rework-type">GAME · WEB / PWA</span>
-              </div>
-              <h3>Bounce Tales</h3>
-              <p>A browser rebuild inspired by the classic mobile game.</p>
-              <div class="project-links" aria-label="bounce-tales links">
-                <a class="project-source" href="https://github.com/PrasannaOne/BounceTales" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/BounceTales/" target="_blank" rel="noopener noreferrer">Play <span>↗</span></a>
-              </div>
-            </article>
-            <article class="rework-card" id="2048-upgrade">
-              <div class="rework-top">
-                <span class="rework-icon tiles-icon" aria-hidden="true"><i>2</i><i>0</i><i>4</i><i>8</i></span>
-                <span class="rework-type">PUZZLE · PWA</span>
-              </div>
-              <h3>2048 Upgrade</h3>
-              <p>A refreshed take on the familiar number puzzle.</p>
-              <div class="project-links" aria-label="2048-upgrade links">
-                <a class="project-source" href="https://github.com/PrasannaOne/2048-Upgrade" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/2048-Upgrade/" target="_blank" rel="noopener noreferrer">Play <span>↗</span></a>
-              </div>
-            </article>
-          </div>
-        </div>
+<p class="project-detail">DeepCalc lets you work through calculations line by line instead of treating every sum as a one-off. Reuse variables and earlier results, attach notes, and save named sheets. It has separate web/PWA and native Android editions.</p><ul class="project-highlights"><li>Live results, reusable variables and previous-result references</li><li>Notes, keypad and saved calculation sheets</li><li>Web app plus a separate native Android app</li></ul>
+<div aria-label="DeepCalc links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/DeepCalc" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-apk" href="https://github.com/PrasannaOne/DeepCalc/releases/latest" rel="noopener noreferrer" target="_blank">APK <span>↓</span></a>
+<a class="project-live" href="https://prasannaone.github.io/DeepCalc/" rel="noopener noreferrer" target="_blank">Open web app <span>↗</span></a>
+</div>
+</article></div></details>
+<details class="project-tab" data-project="brilliant-calc"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">The Brilliant Calc</span><span class="project-tab-teaser">A calculator with a very confident sense of humour. Check the answer twice.</span></span><span class="project-tab-kind">CALCULATOR · WEB APP</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="brilliant-calc">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon brilliant-icon">✳</span>
+<span class="rework-type">CALCULATOR · WEB APP</span>
+</div>
 
-        <div class="category">
-          <div class="category-head"><strong>04 / Tools</strong><span>Useful things, built to think with</span></div>
-          <div class="rework-grid">
-            <article class="rework-card" id="deepcalc">
-              <div class="rework-top">
-                <span class="rework-icon deepcalc-icon" aria-hidden="true">∑</span>
-                <span class="rework-type">CALCULATOR · WEB + ANDROID</span>
-              </div>
-              <h3>DeepCalc</h3>
-              <p>A calculation workspace, available on the web and Android.</p>
-              <div class="project-links" aria-label="DeepCalc links">
-                <a class="project-source" href="https://github.com/PrasannaOne/DeepCalc" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-apk" href="https://github.com/PrasannaOne/DeepCalc/releases/latest" target="_blank" rel="noopener noreferrer">APK <span>↓</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/DeepCalc/" target="_blank" rel="noopener noreferrer">Open web app <span>↗</span></a>
-              </div>
-            </article>
-            <article class="rework-card" id="brilliant-calc">
-              <div class="rework-top">
-                <span class="rework-icon brilliant-icon" aria-hidden="true">✳</span>
-                <span class="rework-type">CALCULATOR · PWA</span>
-              </div>
-              <h3>The Brilliant Calc</h3>
-              <p>A playful calculator with a hidden extra.</p>
-              <div class="project-links" aria-label="brilliant-calc links">
-                <a class="project-source" href="https://github.com/PrasannaOne/The-brilliant-Calc" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/The-brilliant-Calc/" target="_blank" rel="noopener noreferrer">Try it <span>↗</span></a>
-              </div>
-            </article>
-          </div>
-        </div>
+<p class="project-detail">The Brilliant Calc is a playful calculator that deliberately nudges results away from the exact answer for its joke. There is a hidden Panic Mode that switches back to correct mathematics, plus calculation history and optional haptics.</p><ul class="project-highlights"><li>A deliberately inaccurate troll mode</li><li>Secret Panic Mode for real calculations</li><li>Calculation history and toggleable haptics</li></ul>
+<div aria-label="brilliant-calc links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/The-brilliant-Calc" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://prasannaone.github.io/The-brilliant-Calc/" rel="noopener noreferrer" target="_blank">Try it <span>↗</span></a>
+</div>
+</article></div></details>
+</div>
+</section>
+<section class="category">
+<div class="category-head"><strong>05 / Experiments</strong></div>
+<div class="rework-grid project-tab-list">
+<details class="project-tab" data-project="skylight"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">SkyLight</span><span class="project-tab-teaser">An endless night sky where you can connect stars and make your own constellations.</span></span><span class="project-tab-kind">CREATIVE · PWA</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="skylight">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon skylight-icon"><i></i><i></i><i></i><i></i></span>
+<span class="rework-type">CREATIVE · PWA</span>
+</div>
 
-        <div class="category">
-          <div class="category-head"><strong>05 / Experiments</strong><span>Atmosphere, movement and play</span></div>
-          <div class="rework-grid">
-            <article class="rework-card" id="skylight">
-              <div class="rework-top">
-                <span class="rework-icon skylight-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-                <span class="rework-type">CREATIVE · PWA</span>
-              </div>
-              <h3>SkyLight</h3>
-              <p>An open sky for making and saving constellations.</p>
-              <div class="project-links" aria-label="skylight links">
-                <a class="project-source" href="https://github.com/PrasannaOne/SkyLight" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/SkyLight/" target="_blank" rel="noopener noreferrer">Open project <span>↗</span></a>
-              </div>
-            </article>
-            <article class="rework-card" id="arc-spinner">
-              <div class="rework-top">
-                <span class="rework-icon arc-icon" aria-hidden="true"><i></i></span>
-                <span class="rework-type">MOTION · PWA</span>
-              </div>
-              <h3>The Arc Spinner</h3>
-              <p>A small interactive experiment in motion.</p>
-              <div class="project-links" aria-label="arc-spinner links">
-                <a class="project-source" href="https://github.com/PrasannaOne/The-Arc-Spinner" target="_blank" rel="noopener noreferrer">Source <span>↗</span></a>
-                <a class="project-live" href="https://prasannaone.github.io/The-Arc-Spinner/" target="_blank" rel="noopener noreferrer">Open project <span>↗</span></a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
+<p class="project-detail">SkyLight is a meditative celestial drawing sandbox. Explore an infinite procedural starfield, weave connections between stars, and hear soft harp-like notes as your constellations take shape.</p><ul class="project-highlights"><li>Infinite starfield with pan and zoom</li><li>Draw constellations with touch or mouse</li><li>Gentle audio feedback, themes, undo and automatic saving</li></ul>
+<div aria-label="skylight links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/SkyLight" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://prasannaone.github.io/SkyLight/" rel="noopener noreferrer" target="_blank">Open project <span>↗</span></a>
+</div>
+</article></div></details>
+<details class="project-tab" data-project="arc-spinner"><summary class="project-tab-head"><span aria-hidden="true" class="project-tab-mark"></span><span class="project-tab-copy"><span class="project-tab-name">The Arc Spinner</span><span class="project-tab-teaser">A small object with a surprisingly satisfying amount of physics.</span></span><span class="project-tab-kind">MOTION · PWA</span><span aria-hidden="true" class="project-tab-toggle"></span></summary><div class="project-tab-panel"><article class="rework-card" id="arc-spinner">
+<div class="rework-top">
+<span aria-hidden="true" class="rework-icon arc-icon"><i></i></span>
+<span class="rework-type">MOTION · PWA</span>
+</div>
 
-    <section class="about" id="about">
-      <div class="wrap">
-        <div class="about-head"><div><div class="eyebrow">A little about the person behind the pixels</div><h2>Curious by nature.<br><em>Builder by habit.</em></h2></div></div>
-        <div class="about-grid">
-          <div class="profile-card"><div class="profile-top"><span>Based in Tamil Nadu</span><span>India · IN</span></div><div class="profile-name"><strong>Prasanna</strong><span>Investor · Psychologist</span><div class="age-pill"><strong id="liveAge">—</strong><span>years old</span></div></div></div>
-          <div class="about-copy"><p>I have an <strong>M.Sc. in Psychology</strong> and am currently pursuing an <strong>MBA</strong>. I have been investing in the stock market since 2022.</p><p>Building is where those interests meet technology. I like making useful things, playful experiences and small corners of the internet that feel considered.</p><div class="about-tags"><span>M.Sc. Psychology</span><span>Pursuing an MBA</span><span><strong id="investingYears">4+</strong> years investing</span></div></div>
-        </div>
-        <section class="listening-panel" id="listening" aria-labelledby="listeningTitle">
-          <div class="listening-head">
-            <div>
-              <div class="eyebrow">A little soundtrack to the days</div>
-              <h3 class="listening-title" id="listeningTitle">On <em>repeat.</em></h3>
-            </div>
-            <a class="listen-profile-link" href="https://listenbrainz.org/user/PrasannaOne/" target="_blank" rel="noopener noreferrer">ListenBrainz ↗</a>
-          </div>
-          <div class="listening-grid">
-            <article class="now-card" id="nowPlayingCard" aria-live="polite">
-              <div class="listen-art" id="nowPlayingArt"><span class="listen-fallback">♪</span></div>
-              <div class="listen-track">
-                <div class="listen-state" id="nowPlayingState">Last played</div>
-                <strong id="nowPlayingTitle" class="loading-shimmer">Checking what’s playing…</strong>
-                <span id="nowPlayingArtist">Your latest listening activity</span>
-              </div>
-            </article>
-            <div class="listen-recent">
-              <div class="listen-recent-head"><strong>Recently played</strong><span class="top-artist">Last 3 listens</span></div>
-              <div class="listen-list is-loading" id="recentList"><div class="listen-skeleton"><i></i><i></i><i></i></div></div>
-            </div>
-          </div>
-        </section>
+<p class="project-detail">The Arc Spinner is a tactile motion experiment built around a draggable spinner. Grab and toss it with spring-like physics, or flick the surrounding space to send it spinning in place.</p><ul class="project-highlights"><li>Physics-driven drag, toss and momentum</li><li>Layered motion, shadows and synthesized click feedback</li><li>Light and dark appearances, colour palettes and PWA support</li></ul>
+<div aria-label="arc-spinner links" class="project-links">
+<a class="project-source" href="https://github.com/PrasannaOne/The-Arc-Spinner" rel="noopener noreferrer" target="_blank">Source <span>↗</span></a>
+<a class="project-live" href="https://prasannaone.github.io/The-Arc-Spinner/" rel="noopener noreferrer" target="_blank">Open project <span>↗</span></a>
+</div>
+</article></div></details>
+</div>
+</section></div>
 
-        <section class="community-card" id="community" aria-labelledby="communityTitle">
-          <div class="community-copy">
-            <div class="eyebrow">The PrasannaOne community</div>
-            <h3 id="communityTitle">Good ideas grow together.</h3>
-            <p>Join the group to talk about projects, share ideas, exchange feedback and follow the journey as PrasannaOne grows.</p>
-          </div>
-          <a class="community-join" href="https://t.me/Prasanna_One" target="_blank" rel="noopener noreferrer" aria-label="Join the PrasannaOne Telegram community">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 4.2 18.3 20c-.24 1.12-.88 1.4-1.78.87l-4.94-3.64-2.38 2.3c-.26.27-.48.49-.98.49l.35-5.03 9.15-8.27c.4-.35-.09-.55-.62-.2L5.8 13.64.94 12.12c-1.06-.33-1.08-1.06.22-1.57L20.1 3.2c.88-.32 1.65.21 1.4 1Z"/></svg>
-            <span>Join the group ↗</span>
-          </a>
-        </section>
-
-        <div class="contact-row" id="contact">
-          <div class="contact-heading">
-            <strong>Find me here.</strong>
-          </div>
-          <div class="socials" aria-label="Contact and social links">
-            <a class="social-link github" href="https://github.com/PrasannaOne" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.5-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1.77 2.02 3.36 1.44.1-.73.39-1.23.7-1.52-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.13-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.33-2.63 5.28-5.14 5.56.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></svg>
-              <span>GitHub</span>
-            </a>
-            <a class="social-link instagram" href="https://www.instagram.com/prasanna_maivizhiyan_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.6" cy="6.6" r="1.1" class="solid"/></svg>
-              <span>Instagram</span>
-            </a>
-            <a class="social-link telegram" href="https://t.me/PrasannaOne" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 4.2 18.3 20c-.24 1.12-.88 1.4-1.78.87l-4.94-3.64-2.38 2.3c-.26.27-.48.49-.98.49l.35-5.03 9.15-8.27c.4-.35-.09-.55-.62-.2L5.8 13.64.94 12.12c-1.06-.33-1.08-1.06.22-1.57L20.1 3.2c.88-.32 1.65.21 1.4 1Z"/></svg>
-              <span>Telegram</span>
-            </a>
-            <a class="social-link matrix" href="https://matrix.to/#/@prasanna:tchncs.de" target="_blank" rel="noopener noreferrer" aria-label="Matrix">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4.5h3v1.7H5v11.6h1v1.7H3zM21 4.5h-3v1.7h1v11.6h-1v1.7h3zM8 8h2.1l1.9 2.4L13.9 8H16v8h-2v-4.9l-2 2.5-2-2.5V16H8z"/></svg>
-              <span>Matrix</span>
-            </a>
-            <a class="social-link email" href="mailto:velcro-shortly-dad@duck.com" aria-label="Email">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>
-              <span>Email</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer"><div class="wrap footer-inner"><span>© <span id="year"></span> · Made independently in Tamil Nadu</span><div class="footer-actions"><a href="#home">Back to the beginning ↑</a></div></div></footer>
-
-
-  <script>
+</section>
+<section class="about" id="about">
+<div class="wrap">
+<div class="about-head"><div><h2>A little about me</h2></div></div>
+<div class="about-grid">
+<div class="profile-card"><div class="profile-name"><strong>Prasanna</strong><span>Investor · Psychologist</span><div class="age-pill"><strong>22</strong><span>years old</span></div></div></div>
+<div class="about-copy"><p>I have an <strong>M.Sc. in Psychology</strong>, am pursuing an <strong>MBA</strong>, and have been investing in the stock market since 2022. I enjoy building useful tools, playful experiences and small corners of the internet.</p></div>
+</div>
+<section aria-labelledby="listeningTitle" class="listening-panel" id="listening">
+<div class="listening-head">
+<div>
+<h3 class="listening-title" id="listeningTitle">On <em>repeat.</em></h3>
+</div>
+<a class="listen-profile-link" href="https://listenbrainz.org/user/PrasannaOne/" rel="noopener noreferrer" target="_blank">ListenBrainz ↗</a>
+</div>
+<div class="listening-grid">
+<article aria-live="polite" class="now-card" id="nowPlayingCard">
+<div class="listen-art" id="nowPlayingArt"><span class="listen-fallback">♪</span></div>
+<div class="listen-track">
+<div class="listen-state" id="nowPlayingState">Last played</div>
+<strong class="loading-shimmer" id="nowPlayingTitle">Checking what’s playing…</strong>
+<span id="nowPlayingArtist">Your latest listening activity</span>
+</div>
+</article>
+<div class="listen-recent">
+<div class="listen-recent-head"><strong>Recently played</strong><span class="top-artist">Last 3 listens</span></div>
+<div class="listen-list is-loading" id="recentList"><div class="listen-skeleton"><i></i><i></i><i></i></div></div>
+</div>
+</div>
+</section>
+<section aria-labelledby="communityTitle" class="community-card" id="community">
+<div class="community-copy">
+<h3 id="communityTitle">PrasannaOne community</h3>
+<p>Talk projects, share ideas and exchange feedback.</p>
+</div>
+<a aria-label="Join the PrasannaOne Telegram community" class="community-join" href="https://t.me/Prasanna_One" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M21.5 4.2 18.3 20c-.24 1.12-.88 1.4-1.78.87l-4.94-3.64-2.38 2.3c-.26.27-.48.49-.98.49l.35-5.03 9.15-8.27c.4-.35-.09-.55-.62-.2L5.8 13.64.94 12.12c-1.06-.33-1.08-1.06.22-1.57L20.1 3.2c.88-.32 1.65.21 1.4 1Z"></path></svg>
+<span>Join the group ↗</span>
+</a>
+</section>
+<div class="contact-row" id="contact">
+<div class="contact-heading">
+<strong>Find me here.</strong>
+</div>
+<div aria-label="Contact and social links" class="socials">
+<a aria-label="GitHub" class="social-link github" href="https://github.com/PrasannaOne" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.82c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.5-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1.77 2.02 3.36 1.44.1-.73.39-1.23.7-1.52-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.13-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.79 1.16 3.02 0 4.33-2.63 5.28-5.14 5.56.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"></path></svg>
+<span>GitHub</span>
+</a>
+<a aria-label="Instagram" class="social-link instagram" href="https://www.instagram.com/prasanna_maivizhiyan_/" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><rect height="18" rx="5" width="18" x="3" y="3"></rect><circle cx="12" cy="12" r="4"></circle><circle class="solid" cx="17.6" cy="6.6" r="1.1"></circle></svg>
+<span>Instagram</span>
+</a>
+<a aria-label="Telegram" class="social-link telegram" href="https://t.me/PrasannaOne" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M21.5 4.2 18.3 20c-.24 1.12-.88 1.4-1.78.87l-4.94-3.64-2.38 2.3c-.26.27-.48.49-.98.49l.35-5.03 9.15-8.27c.4-.35-.09-.55-.62-.2L5.8 13.64.94 12.12c-1.06-.33-1.08-1.06.22-1.57L20.1 3.2c.88-.32 1.65.21 1.4 1Z"></path></svg>
+<span>Telegram</span>
+</a>
+<a aria-label="Matrix" class="social-link matrix" href="https://matrix.to/#/@prasanna:tchncs.de" rel="noopener noreferrer" target="_blank">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M3 4.5h3v1.7H5v11.6h1v1.7H3zM21 4.5h-3v1.7h1v11.6h-1v1.7h3zM8 8h2.1l1.9 2.4L13.9 8H16v8h-2v-4.9l-2 2.5-2-2.5V16H8z"></path></svg>
+<span>Matrix</span>
+</a>
+<a aria-label="Email" class="social-link email" href="mailto:velcro-shortly-dad@duck.com">
+<svg aria-hidden="true" viewbox="0 0 24 24"><rect height="15" rx="3" width="19" x="2.5" y="4.5"></rect><path d="m3.5 6 8.5 7 8.5-7"></path></svg>
+<span>Email</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer"><div class="wrap footer-inner"><div class="footer-actions"><a href="#home">Back to the beginning ↑</a></div></div></footer>
+<script>
     (() => {
       'use strict';
       const $ = (selector, root = document) => root.querySelector(selector);
       const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
+      // The HTML project cards are the catalogue source of truth; count them automatically.
+      const projectCountNode = $('#projectCount');
+      const projectTotal = $$('#work .rework-card').length;
+      if (projectCountNode) projectCountNode.textContent = `${String(projectTotal).padStart(2, '0')} PROJECTS`;
+
       // Dark mode is the site's fixed colour theme.
       document.body.dataset.theme = 'dark';
 
-      // Age is calculated locally from the birthday. The date itself is never displayed or sent.
-      const calculateAge = (year, monthIndex, day, today = new Date()) => {
-        let age = today.getFullYear() - year;
-        const hasHadBirthday = today.getMonth() > monthIndex ||
-          (today.getMonth() === monthIndex && today.getDate() >= day);
-        if (!hasHadBirthday) age--;
-        return age;
-      };
-      const updateLiveAge = () => {
-        const ageNode = $('#liveAge');
-        if (ageNode) ageNode.textContent = String(calculateAge(2004, 4, 26));
-      };
-      updateLiveAge();
-      document.addEventListener('visibilitychange', () => { if (!document.hidden) updateLiveAge(); });
+      // Age is intentionally a static display value. No birth date is shipped to visitors.
 
       // Investing experience is calculated from April 2022 and updates automatically each year.
       const updateInvestingYears = () => {
@@ -2055,7 +2149,6 @@ body[data-theme="dark"] .community-card {
       };
       updateInvestingYears();
       document.addEventListener('visibilitychange', () => { if (!document.hidden) updateInvestingYears(); });
-      $('#year').textContent = String(new Date().getFullYear());
 
       // Small return-to-top control, hidden until it is useful.
       const backTop = $('#backTop');
@@ -2357,11 +2450,28 @@ body[data-theme="dark"] .community-card {
 
     })();
   </script>
-  <button class="back-top" id="backTop" type="button" aria-label="Back to top" title="Back to top">↑</button>
-
+<button aria-label="Back to top" class="back-top" id="backTop" title="Back to top" type="button">↑</button>
 <!-- Cloudflare Web Analytics -->
-<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c622bff26b1844c58209a7bd2326592d"}'></script>
+<script data-cf-beacon='{"token": "c622bff26b1844c58209a7bd2326592d"}' src="https://static.cloudflareinsights.com/beacon.min.js" type="module"></script>
 <!-- End Cloudflare Web Analytics -->
+
+<script>
+  // Progressive, scroll-triggered entrance motion. No layout work on every scroll frame.
+  (() => {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets = document.querySelectorAll('.about-head, .profile-card, .about-copy, .listening-panel, .community-card, .contact-row');
+    if (reduceMotion || !('IntersectionObserver' in window) || !targets.length) return;
+    targets.forEach((element) => element.classList.add('motion-reveal'));
+    const observer = new IntersectionObserver((entries, instance) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        instance.unobserve(entry.target);
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+    targets.forEach((element) => observer.observe(element));
+  })();
+</script>
+
 </body>
 </html>
-
